@@ -16,8 +16,8 @@ LIBFT		=	libft/libft.a
 FT_PRINTF	=	ft-printf/libftprintf.a
 LIBMLX		=	minilibx_macos/libmlx.a
 
-SRCS		=	program/get_next_line_utils.c	\
-				program/get_next_line.c			\
+SRCS		=	get-next-line/get_next_line_utils.c	\
+				get-next-line/get_next_line.c		\
 				program/main.c
 
 CC			=	cc

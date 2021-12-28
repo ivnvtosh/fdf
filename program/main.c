@@ -11,15 +11,146 @@
 /* ************************************************************************** */
 
 #include <fcntl.h>
+#include <stdlib.h>
 #include "../minilibx_macos/mlx.h"
 #include "../ft-printf/printf.h"
 #include "../get-next-line/get_next_line.h"
 #include "../libft/libft.h"
 
-int	main(int argc, char **argv)
+// mlx_pixel_put(t_win->mlx_ptr, t_win->win_ptr, x, y, 0xffffff);
+
+typedef struct s_win
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+}	t_win;
+
+typedef struct s_lst
+{
+	int				*vertex;
+	struct s_lst	*next;
+}	t_lst;
+
+int	key_pressed(int key)
+{
+	ft_printf("pressed the key %d\n", key);
+	if (key == 53)
+		exit(0);
+	return (0);
+}
+
+t_lst	*input(int fd)
+{
+	t_lst	*lst;
+	t_lst	*start;
+	char	**ps;
+	char	*s;
+	int		*pi;
+	int		i;
+
+	lst = malloc(sizeof(lst));
+	if (lst == NULL)
+		return (NULL);
+	start = lst;
+	s = get_next_line(fd);					//	!
+	ps = ft_split(s, 32);
+	free(s);
+	if (ps == NULL)
+		return (NULL);
+	i = 0;
+	while (ps[i])
+		i++;
+	pi = malloc(sizeof(int *) * (i + 1));
+	if (pi == NULL)
+		return (NULL);
+	i = 0;
+	while (ps[i])
+	{
+		pi[i] = ft_atoi(ps[i]) + 1;
+		ft_printf("%d|", pi[i] - 1);
+		free(ps[i++]);
+	}
+	free(ps);
+	lst->vertex = pi;
+	s = get_next_line(fd);
+	ft_printf("\n");
+	while (s)
+	{
+		lst->next = malloc(sizeof(lst));
+		if (lst->next == NULL)
+			return (NULL);
+		lst = lst->next;
+		ps = ft_split(s, 32);
+		free(s);
+		if (ps == NULL)
+			return (NULL);
+		i = 0;
+		while (ps[i])
+			i++;
+		pi = malloc(sizeof(int *) * (i + 1));
+		if (pi == NULL)
+			return (NULL);
+		i = 0;
+		while (ps[i])
+		{
+			pi[i] = ft_atoi(ps[i]) + 1;
+			ft_printf("\x1b[31m%d|\x1b[0m", pi[i] - 1);
+			free(ps[i++]);
+		}
+		ft_printf("\x1b[31m%d|\x1b[0m", pi[i]);
+		free(ps);
+		pi[i] = 0;
+		lst->vertex = pi;
+		s = get_next_line(fd);
+		ft_printf("\n");
+	}
+	lst->next = NULL;
+	return (start);
+}
+
+void	print(t_win *t_win, t_lst *lst)
+{
+	int	zoom;
+	int	*pi;
+	int	i;
+	int	x;
+	int	y;
+	int	t;
+	int	color;
+
+	zoom = 16;
+	y = 80;
+	color = 0xffffff;
+	ft_printf("\n");
+	while (lst)
+	{
+		pi = lst->vertex;
+		x = 400;
+		i = 0;
+		while (pi[i])
+		{
+			t = 0;
+			while (t < zoom && pi[i + 1])
+				mlx_pixel_put(t_win->mlx_ptr, t_win->win_ptr, x + t++, y, color);
+			t = 0;
+			while (t < zoom && lst->next)
+				mlx_pixel_put(t_win->mlx_ptr, t_win->win_ptr, x, y+ t++ , color);
+			x += zoom;
+			ft_printf("%d|", pi[i]);
+			i++;
+		}
+		ft_printf("\n");
+		color -= 0x040000;
+		free(pi);
+		y += zoom;
+		lst = lst->next;
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	t_win	*t_win;
+	t_lst	*lst;
 	int		fd;
 
 	if (argc != 2)
@@ -27,119 +158,18 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], S_IREAD);
 	if (fd == -1)
 		return (1);
+	t_win = ft_calloc(1, sizeof(t_win));
+	if (t_win == NULL)
+		return (1);
+	t_win->mlx_ptr = mlx_init();
+	t_win->win_ptr = mlx_new_window(t_win->mlx_ptr, 1220, 700, "FDF");
+	mlx_string_put(t_win->mlx_ptr, t_win->win_ptr, 20, 10, 0xe2e2e2, &argv[1][10]);
 
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 512, 512, "FDF");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	char	*s;
-	char	**p;
-
-	int	i;
-
-	int	*pd;
-
-	int d;
-
-	int	x;
-	int	y;
-	int	step_x;
-	int	step_y;
-
-
-	s = get_next_line(fd);
-	step_y = 100;
-	while(s)
-	{
-		p = ft_split(s, ' ');
-		free(s);
-
-		i = 0;
-		while (p[i])
-			i++;
-
-		pd = malloc(sizeof(char *) * (i + 1));
-		if (pd == NULL)
-			return (0);
-
-		i = 0;
-		while (p[i])
-		{
-			pd[i] = ft_atoi(p[i]);
-			free(p[i]);
-			i++;
-		}
-		free(p);
-		d = i;
-
-
-		i = 0;
-		x = 100;
-		y = step_y;
-		step_x = 100;
-		while (i < d)
-		{
-			step_x += 10;
-			while (x < step_x)
-				mlx_pixel_put(mlx_ptr, win_ptr, x++, y, 0xffffff);
-			y = step_y;
-			while (y < step_y + 10)
-				mlx_pixel_put(mlx_ptr, win_ptr, x, y++, 0xffffff);
-			i++;
-		}
-		step_y += 10;
-		free(pd);
-		s = get_next_line(fd);
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	mlx_loop(mlx_ptr);
+	lst = input(fd);
+	print(t_win, lst);
+	
+	mlx_key_hook(t_win->win_ptr, key_pressed, NULL);
+	mlx_loop(t_win->mlx_ptr);
+	free(t_win);
 	return (0);
 }
