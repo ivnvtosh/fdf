@@ -34,11 +34,11 @@ $(NAME)		:	$(LIBFT) $(FT_PRINTF) $(LIBMLX) $(OBJS)
 				$(CC) $(CFLAGS) $(FT_PRINTF) $(LIBMLX) $(OBJS) -framework OpenGL -framework AppKit -o $(NAME) 
 
 $(LIBFT)	:
-				make -C libft
+				make -C libft bonus
 				make -C libft clean
 	
 $(FT_PRINTF):
-				make -C ft-printf
+				make -C ft-printf all
 				make -C ft-printf clean
 
 $(LIBMLX)	:
