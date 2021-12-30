@@ -18,7 +18,11 @@ LIBMLX		=	minilibx_macos/libmlx.a
 
 SRCS		=	get-next-line/get_next_line_utils.c	\
 				get-next-line/get_next_line.c		\
+				program/get_map.c					\
+				program/draw.c						\
+				program/key_pressed.c				\
 				program/main.c
+				
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror

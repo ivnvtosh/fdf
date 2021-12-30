@@ -17,44 +17,110 @@
 #include "../get-next-line/get_next_line.h"
 #include "../libft/libft.h"
 #include "../libft/libft_bonus.h"
+#include "stdio.h"
 
 typedef struct s_wind
 {
+	int		***map;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int		offset_x;
+	int		offset_y;
+	int		zoom;
+	int		color;
+	int		z;
+	float	angl_x;
+	float	angl_y;
 }	t_wind;
 
-int	key_pressed(int key)
-{
-	ft_printf("pressed the key %d\n", key);
-	if (key == 53)
-		exit(0);
-	return (0);
-}
 
-t_list	*read_map(int fd)
-{
-	
-}
+int		***get_map(int fd);
+void	draw(t_wind *win);
+int		key_pressed(int key, t_wind *win);
 
 void	ft_fdf(t_wind *win, int fd)
 {
-	t_list	*lst_str;
+	win->map = get_map(fd);
 
-	win->mlx_ptr = mlx_init();
-	win->win_ptr = mlx_new_window(win->mlx_ptr, 1220, 700, "FDF");
-	lst_str = read_map(fd);
+	win->offset_x = 600;
+	win->offset_y = 180;
+	win->angl_x = 0.2;
+	win->angl_y = 0.6;
+	win->zoom = 10;
+	draw(win);
+	
+}
 
+// void	key_wasd(int key, t_wind *win)
+// {
+// 	if (key == KEY_W)
+// 	{
+// 		win->angl_y -= 0.1;
+// 		win->offset_y += 20;
+// 		ft_printf("pressed the key %d *W*\n", key);
+// 	}
+// 	else if (key == KEY_A)
+// 	{
+// 		win->angl_x -= 0.1;
+// 		ft_printf("pressed the key %d *A*\n", key);
+// 	}
+// 	else if (key == KEY_S)
+// 	{
+// 		win->angl_y += 0.1;
+// 		win->offset_y -= 20;
+// 		ft_printf("pressed the key %d *S*\n", key);
+// 	}
+// 	else if (key == KEY_D)
+// 	{
+// 		win->angl_x += 0.1;
+// 		ft_printf("pressed the key %d *D*\n", key);
+// 	}
+// 	mlx_clear_window(win->mlx_ptr, win->win_ptr);
+// 	draw(win);
+// }
 
-
-	mlx_key_hook(win->win_ptr, key_pressed, NULL);
-	mlx_loop(win->mlx_ptr);
+int	mouse_pressed(int key, t_wind *win)
+{
+	(void)win;
+	if (key == 1)
+	{
+		// win->angl_y -= 0.1;
+		// win->offset_y = 20;
+		ft_printf("pressed the key %d *left click*\n", key);
+		// mlx_clear_window(win->mlx_ptr, win->win_ptr);
+		// draw(win);
+	}
+	else if (key == 2)
+	{
+		win->angl_y -= 0.1;
+		ft_printf("pressed the key %d *right click*\n", key);
+	}
+	else if (key == 5)
+	{
+		ft_printf("pressed the key %d *up*\n", key);
+	}
+	else if (key == 7)
+	{
+		ft_printf("pressed the key %d *left*\n", key);
+	}
+	else if (key == 4)
+	{
+		ft_printf("pressed the key %d *down*\n", key);
+	}
+	else if (key == 6)
+	{
+		ft_printf("pressed the key %d *right*\n", key);
+	}
+	else
+	{
+		ft_printf("%d", key);
+	}
+	return (key);
 }
 
 int	main(int argc, char **argv)
 {
 	t_wind	*win;
-	t_list	*lst;
 	int		fd;
 
 	if (argc != 2)
@@ -65,163 +131,15 @@ int	main(int argc, char **argv)
 	win = (t_wind *)malloc(sizeof(t_wind));
 	if (win == NULL)
 		return (1);
-	mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 10, 0xe2e2e2, &argv[1][10]);
+	win->mlx_ptr = mlx_init();
+	win->win_ptr = mlx_new_window(win->mlx_ptr, 1220, 700, "FDF");
+	// win->win_ptr = mlx_new_window(win->mlx_ptr, 122, 70, "FDF");
+	// mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 10, 0xe2e2e2, &adrgv[1][10]);
 	ft_fdf(win, fd);
+	mlx_key_hook(win->win_ptr, key_pressed, win);
+	mlx_mouse_hook(win->win_ptr, mouse_pressed, win);
+	// mlx_do_key_autorepeaton(win->mlx_ptr);
+	mlx_loop(win->mlx_ptr);
 	free(win);
 	return (0);
 }
-
-// typedef struct s_win
-// {
-// 	void	*mlx_ptr;
-// 	void	*win_ptr;
-// }	t_win;
-
-// typedef struct s_lst
-// {
-// 	int	*vertex;
-// 	struct s_lst *next;
-// }	t_lst;
-
-// int	key_pressed(int key)
-// {
-// 	ft_printf("pressed the key %d\n", key);
-// 	if (key == 53)
-// 		exit(0);
-// 	return (0);
-// }
-
-// t_lst	*input(int fd)
-// {
-// 	t_lst	*lst;
-// 	t_lst	*start;
-// 	char	**ps;
-// 	char	*s;
-// 	int		*pi;
-// 	int		i;
-
-// 	lst = malloc(sizeof(lst));
-// 	if (lst == NULL)
-// 		return (NULL);
-// 	start = lst;
-// 	s = get_next_line(fd);					//	!
-// 	ps = ft_split(s, 32);
-// 	free(s);
-// 	if (ps == NULL)
-// 		return (NULL);
-// 	i = 0;
-// 	while (ps[i])
-// 		i++;
-// 	pi = malloc(sizeof(int *) * (i + 1));
-// 	if (pi == NULL)
-// 		return (NULL);
-// 	i = 0;
-// 	while (ps[i])
-// 	{
-// 		pi[i] = ft_atoi(ps[i]) + 1;
-// 		ft_printf("%d|", pi[i] - 1);
-// 		free(ps[i++]);
-// 	}
-// 	free(ps);
-// 	lst->vertex = pi;
-// 	s = get_next_line(fd);
-// 	ft_printf("\n");
-// 	while (s)
-// 	{
-// 		lst->next = malloc(sizeof(lst));
-// 		if (lst->next == NULL)
-// 			return (NULL);
-// 		lst = lst->next;
-// 		ps = ft_split(s, 32);
-// 		free(s);
-// 		if (ps == NULL)
-// 			return (NULL);
-// 		i = 0;
-// 		while (ps[i])
-// 			i++;
-// 		pi = malloc(sizeof(int *) * (i + 1));
-// 		if (pi == NULL)
-// 			return (NULL);
-// 		i = 0;
-// 		while (ps[i])
-// 		{
-// 			pi[i] = ft_atoi(ps[i]) + 1;
-// 			ft_printf("\x1b[31m%d|\x1b[0m", pi[i] - 1);
-// 			free(ps[i++]);
-// 		}
-// 		ft_printf("\x1b[31m%d|\x1b[0m", pi[i]);
-// 		free(ps);
-// 		pi[i] = 0;
-// 		lst->vertex = pi;
-// 		s = get_next_line(fd);
-// 		ft_printf("\n");
-// 	}
-// 	lst->next = NULL;
-// 	return (start);
-// }
-
-// void	print(t_win *t_win, t_lst *lst)
-// {
-// 	int	zoom;
-// 	int	*pi;
-// 	int	i;
-// 	int	x;
-// 	int	y;
-// 	int	t;
-// 	int	color;
-
-// 	zoom = 16;
-// 	y = 80;
-// 	color = 0xffffff;
-// 	ft_printf("\n");
-// 	while (lst)
-// 	{
-// 		pi = lst->vertex;
-// 		x = 400;
-// 		i = 0;
-// 		while (pi[i])
-// 		{
-// 			t = 0;
-// 			while (t < zoom && pi[i + 1])
-// 				mlx_pixel_put(t_win->mlx_ptr, t_win->win_ptr, x + t++, y, color);
-// 			t = 0;
-// 			while (t < zoom && lst->next)
-// 				mlx_pixel_put(t_win->mlx_ptr, t_win->win_ptr, x, y+ t++ , color);
-// 			x += zoom;
-// 			ft_printf("%d|", pi[i]);
-// 			i++;
-// 		}
-// 		ft_printf("\n");
-// 		color -= 0x040000;
-// 		free(pi);
-// 		y += zoom;
-// 		lst = lst->next;
-// 	}
-// }
-
-// int	main(int argc, char **argv)
-// {
-// 	t_win	*t_win;
-// 	t_lst	*lst;
-// 	int		fd;
-
-// 	if (argc != 2)
-// 		return (1);
-// 	fd = open(argv[1], S_IREAD);
-// 	if (fd == -1)
-// 		return (1);
-// 	t_win = ft_calloc(1, sizeof(t_win));
-// 	if (t_win == NULL)
-// 		return (1);
-// 	t_win->mlx_ptr = mlx_init();
-// 	t_win->win_ptr = mlx_new_window(t_win->mlx_ptr, 1220, 700, "FDF");
-// 	mlx_string_put(t_win->mlx_ptr, t_win->win_ptr, 20, 10, 0xe2e2e2, &argv[1][10]);
-
-// 	lst = input(fd);
-// 	print(t_win, lst);
-	
-// 	mlx_key_hook(t_win->win_ptr, key_pressed, NULL);
-// 	mlx_loop(t_win->mlx_ptr);
-// 	free(t_win);
-// 	return (0);
-// }
