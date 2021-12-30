@@ -176,7 +176,7 @@ void	print_atoi(int ***map)
 		while (map[y][x])
 		{
 			ft_printf("%d", map[y][x][0]);
-			if (map[y][x][1] != 0x990000)
+			if (map[y][x][1] != 0xFFFFFF)
 				ft_printf(",0x%X", map[y][x][1]);
 			x++;
 			if (map[y][x])
@@ -225,7 +225,7 @@ int	***atoi_map(char ***map_s)
 			if (map_s[y][x][i] == ',')
 				map[y][x][1] = ft_atox(&map_s[y][x][i + 1]);
 			else
-				map[y][x][1] = ft_atox("0x990000");
+				map[y][x][1] = ft_atox("0xFFFFFF");
 			free(map_s[y][x]);
 			x++;
 		}

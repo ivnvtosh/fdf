@@ -21,6 +21,11 @@ SRCS		=	get-next-line/get_next_line_utils.c	\
 				program/get_map.c					\
 				program/draw.c						\
 				program/key_pressed.c				\
+				program/mouse_pressed.c				\
+				program/rotate.c					\
+				program/shift.c						\
+				program/shutdown.c					\
+				program/zoom.c						\
 				program/main.c
 				
 

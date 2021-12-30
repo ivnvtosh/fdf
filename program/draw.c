@@ -68,7 +68,7 @@ void	draw(t_wind *win)
 		x = 0;
 		while (map[y][x])
 		{
-			win->color = map[y][x][1] + win->z * 200;
+			win->color = map[y][x][1] + win->z - 0x020202;
 			win->z = map[y][x][0];
 			if (map[y][x + 1])
 				draw_line_x(win, x * win->zoom, y * win->zoom);

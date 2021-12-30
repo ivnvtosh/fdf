@@ -37,6 +37,7 @@ typedef struct s_wind
 int		***get_map(int fd);
 void	draw(t_wind *win);
 int		key_pressed(int key, t_wind *win);
+int		mouse_pressed(int key, int x, int y, t_wind *win);
 
 void	ft_fdf(t_wind *win, int fd)
 {
@@ -45,7 +46,7 @@ void	ft_fdf(t_wind *win, int fd)
 	win->offset_x = 600;
 	win->offset_y = 180;
 	win->angl_x = 0.2;
-	win->angl_y = 0.6;
+	win->angl_y = 1;
 	win->zoom = 10;
 	draw(win);
 	
@@ -79,42 +80,21 @@ void	ft_fdf(t_wind *win, int fd)
 // 	draw(win);
 // }
 
-int	mouse_pressed(int key, t_wind *win)
+
+int		key_pressed_re(int key, t_wind *win)
 {
+	ft_printf("key_pressed_re\n");
 	(void)win;
-	if (key == 1)
-	{
-		// win->angl_y -= 0.1;
-		// win->offset_y = 20;
-		ft_printf("pressed the key %d *left click*\n", key);
-		// mlx_clear_window(win->mlx_ptr, win->win_ptr);
-		// draw(win);
-	}
-	else if (key == 2)
-	{
-		win->angl_y -= 0.1;
-		ft_printf("pressed the key %d *right click*\n", key);
-	}
-	else if (key == 5)
-	{
-		ft_printf("pressed the key %d *up*\n", key);
-	}
-	else if (key == 7)
-	{
-		ft_printf("pressed the key %d *left*\n", key);
-	}
-	else if (key == 4)
-	{
-		ft_printf("pressed the key %d *down*\n", key);
-	}
-	else if (key == 6)
-	{
-		ft_printf("pressed the key %d *right*\n", key);
-	}
-	else
-	{
-		ft_printf("%d", key);
-	}
+	return (key);
+}
+
+int		mouse_pressed_re(int key, int x, int y, t_wind *win)
+{
+	mlx_hook(win->win_ptr, 6, 0, NULL, win);
+	ft_printf("mouse_pressed_re\n");
+	(void)x;
+	(void)y;
+	(void)win;
 	return (key);
 }
 
@@ -132,13 +112,19 @@ int	main(int argc, char **argv)
 	if (win == NULL)
 		return (1);
 	win->mlx_ptr = mlx_init();
-	win->win_ptr = mlx_new_window(win->mlx_ptr, 1220, 700, "FDF");
+	win->win_ptr = mlx_new_window(win->mlx_ptr, 1920, 1080, "FDF");
+	// win->win_ptr = mlx_new_window(win->mlx_ptr, 1220, 700, "FDF");
 	// win->win_ptr = mlx_new_window(win->mlx_ptr, 122, 70, "FDF");
 	// mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 10, 0xe2e2e2, &adrgv[1][10]);
+	mlx_do_key_autorepeaton(win->mlx_ptr);
+	mlx_hook(win->win_ptr, 2, 0, key_pressed, win);
+	mlx_hook(win->win_ptr, 3, 0, key_pressed_re, win);
+	mlx_hook(win->win_ptr, 4, 0, mouse_pressed, win);
+	mlx_hook(win->win_ptr, 5, 0, mouse_pressed_re, win);
+	
 	ft_fdf(win, fd);
-	mlx_key_hook(win->win_ptr, key_pressed, win);
-	mlx_mouse_hook(win->win_ptr, mouse_pressed, win);
-	// mlx_do_key_autorepeaton(win->mlx_ptr);
+	// mlx_key_hook(win->win_ptr, key_pressed, win);
+	// mlx_mouse_hook(win->win_ptr, mouse_pressed, win);
 	mlx_loop(win->mlx_ptr);
 	free(win);
 	return (0);
