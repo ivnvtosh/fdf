@@ -163,7 +163,7 @@ int	mouse_pressed(int key, int x, int y, t_wind *win)
 		mlx_hook(win->win_ptr, 6, 0, mouse_pressed_lol, win);
 		ft_printf("pressed the key %d *right click* x-%d y-%d \n", key, x, y);
 	}
-		
-	zoom_mouse(win, key);
+	rotate_mouse(win, key);
+	// zoom_mouse(win, key);
 	return (key);
 }

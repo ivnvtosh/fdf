@@ -112,10 +112,9 @@ int	main(int argc, char **argv)
 	if (win == NULL)
 		return (1);
 	win->mlx_ptr = mlx_init();
-	win->win_ptr = mlx_new_window(win->mlx_ptr, 1920, 1080, "FDF");
-	// win->win_ptr = mlx_new_window(win->mlx_ptr, 1220, 700, "FDF");
-	// win->win_ptr = mlx_new_window(win->mlx_ptr, 122, 70, "FDF");
-	// mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 10, 0xe2e2e2, &adrgv[1][10]);
+	// win->win_ptr = mlx_new_window(win->mlx_ptr, 1920, 1080, "FDF");
+	win->win_ptr = mlx_new_window(win->mlx_ptr, 1220, 700, "FDF");
+	// mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 10, 0xe2e2e2, &argv[1][10]);
 	mlx_do_key_autorepeaton(win->mlx_ptr);
 	mlx_hook(win->win_ptr, 2, 0, key_pressed, win);
 	mlx_hook(win->win_ptr, 3, 0, key_pressed_re, win);
