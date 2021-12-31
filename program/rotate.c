@@ -5,11 +5,12 @@ typedef struct s_wind
 	void	*win_ptr;
 	int		offset_x;
 	int		offset_y;
-	int		zoom;
+	float	zoom;
 	int		color;
 	int		z;
 	float	angl_x;
 	float	angl_y;
+	void	*image;
 }	t_wind;
 
 #include "../minilibx_macos/mlx.h"
@@ -29,10 +30,10 @@ static void	rotate_y(t_wind *win, float rotate)
 {
 	ft_printf("rotate_y\n");
 	win->angl_y += rotate;
-	if (rotate < 0)
-		win->offset_y += 20;
-	else
-		win->offset_y -= 20;
+	// if (rotate < 0)
+	// 	win->offset_y += 20;
+	// else
+	// 	win->offset_y -= 20;
 }
 
 void	rotate(t_wind *win, int key)

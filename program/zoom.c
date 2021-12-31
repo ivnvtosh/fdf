@@ -5,11 +5,12 @@ typedef struct s_wind
 	void	*win_ptr;
 	int		offset_x;
 	int		offset_y;
-	int		zoom;
+	float	zoom;
 	int		color;
 	int		z;
 	float	angl_x;
 	float	angl_y;
+	void	*image;
 }	t_wind;
 
 #include "../minilibx_macos/mlx.h"
@@ -23,7 +24,7 @@ void	zoom(t_wind *win, int key)
 	if (key == KEY_PLUS)
 	{
 		ft_printf("pressed the key %d *plus*\n", key);
-		win->zoom += 1;
+		win->zoom += win->zoom / 20;
 		win->offset_y -= 10;
 	}
 	else if (key == KEY_MINUS )
@@ -31,7 +32,7 @@ void	zoom(t_wind *win, int key)
 		ft_printf("pressed the key %d *minus*\n", key);
 		if (win->zoom != 1)
 		{
-			win->zoom -= 1;
+			win->zoom -= win->zoom / 20;
 			win->offset_y += 10;
 		}
 	}

@@ -5,11 +5,12 @@ typedef struct s_wind
 	void	*win_ptr;
 	int		offset_x;
 	int		offset_y;
-	int		zoom;
+	float	zoom;
 	int		color;
 	int		z;
 	float	angl_x;
 	float	angl_y;
+	void	*image;
 }	t_wind;
 
 #include "../minilibx_macos/mlx.h"
@@ -34,10 +35,10 @@ static void	rotate_y(t_wind *win, float rotate)
 {
 	ft_printf("rotate_y_mouse\n");
 	win->angl_y += rotate;
-	if (rotate < 0)
-		win->offset_y += 20;
-	else
-		win->offset_y -= 20;
+	// if (rotate < 0)
+	// 	win->offset_y += 20;
+	// else
+	// 	win->offset_y -= 20;
 }
 
 void	rotate_mouse(t_wind *win, int key)
@@ -131,16 +132,16 @@ void	zoom_mouse(t_wind *win, int key)
 	if (key == UP)
 	{
 		ft_printf("pressed the key %d *plus*\n", key);
-		win->zoom += 1;
-		win->offset_y -= 10;
+		win->zoom += win->zoom / 20;
+		// win->offset_y -= 10;
 	}
 	else if (key == DOWN)
 	{
 		ft_printf("pressed the key %d *minus*\n", key);
 		if (win->zoom != 1)
 		{
-			win->zoom -= 1;
-			win->offset_y += 10;
+			win->zoom -= win->zoom / 20;
+			// win->offset_y += 10;
 		}
 	}
 	else
@@ -155,7 +156,8 @@ int	mouse_pressed(int key, int x, int y, t_wind *win)
 	ft_printf("pressed the key %d *nothing* x-%d y-%d \n", key, x, y);
 	if (key == 1)
 	{
-		mlx_hook(win->win_ptr, 6, 0, mouse_pressed_shift, win);
+		// mlx_hook(win->win_ptr, 6, 0, mouse_pressed_shift, win);
+		mlx_hook(win->win_ptr, 6, 0, mouse_pressed_lol, win);
 		ft_printf("pressed the key %d *left click* x-%d y-%d \n", key, x, y);
 	}
 	else if (key == 2)
@@ -163,7 +165,7 @@ int	mouse_pressed(int key, int x, int y, t_wind *win)
 		mlx_hook(win->win_ptr, 6, 0, mouse_pressed_lol, win);
 		ft_printf("pressed the key %d *right click* x-%d y-%d \n", key, x, y);
 	}
-	rotate_mouse(win, key);
-	// zoom_mouse(win, key);
+	// rotate_mouse(win, key);
+	zoom_mouse(win, key);
 	return (key);
 }

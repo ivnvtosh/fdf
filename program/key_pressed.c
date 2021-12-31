@@ -5,11 +5,12 @@ typedef struct s_wind
 	void	*win_ptr;
 	int		offset_x;
 	int		offset_y;
-	int		zoom;
+	float	zoom;
 	int		color;
 	int		z;
 	float	angl_x;
 	float	angl_y;
+	void	*image;
 }	t_wind;
 
 #include "../minilibx_macos/mlx.h"

@@ -26,11 +26,12 @@ typedef struct s_wind
 	void	*win_ptr;
 	int		offset_x;
 	int		offset_y;
-	int		zoom;
+	float	zoom;
 	int		color;
 	int		z;
 	float	angl_x;
 	float	angl_y;
+	void	*image;
 }	t_wind;
 
 
@@ -39,15 +40,54 @@ void	draw(t_wind *win);
 int		key_pressed(int key, t_wind *win);
 int		mouse_pressed(int key, int x, int y, t_wind *win);
 
+void	image(t_wind *win)
+{
+	void	*image;
+	char	*buffer;
+	int		color;
+	int 	pixel_bits;
+	int		line_bytes;
+	int		endian;
+	int		x;
+	int		y;
+	int 	pixel;
+
+	color = 0xABCDEF;
+	pixel_bits = 32;
+	line_bytes = 500;
+	endian = 10;
+	image = mlx_new_image(win->mlx_ptr, 1220, 700);
+	buffer = mlx_get_data_addr(image, &pixel_bits, &line_bytes, &endian);
+	win->image = image;
+	y = 0;
+	// color = mlx_get_color_value(win->mlx_ptr, color);
+	while (y < 700)
+	{
+		x = 0;
+		while (x < 1220)
+		{
+			pixel = (y * line_bytes) + (x * 4);
+			
+			buffer[pixel] = 48;
+			buffer[pixel + 1] = 38;
+			buffer[pixel + 2] = 42;
+			x++;
+
+		}
+		y++;
+	}
+}
+
 void	ft_fdf(t_wind *win, int fd)
 {
 	win->map = get_map(fd);
 
 	win->offset_x = 600;
-	win->offset_y = 180;
-	win->angl_x = 0.2;
+	win->offset_y = 200;
+	win->angl_x = 1;
 	win->angl_y = 1;
-	win->zoom = 10;
+	win->zoom = 1;
+	image(win);
 	draw(win);
 	
 }
