@@ -220,6 +220,16 @@ void	draw_space(t_wind *win)
 	new_vector(i, win->offset_x + win->zoom * cos(win->angl_x * (3.14159265358979323846 / 180)), win->offset_y + win->zoom * sin(win->angl_x * (3.14159265358979323846 / 180)));
 	new_vector(j, win->offset_x + win->zoom * cos(win->angl_y * (3.14159265358979323846 / 180)), win->offset_y + win->zoom * sin(win->angl_y * (3.14159265358979323846 / 180)));
 
+	// 																																					win->color = 0xDD5555;
+	// draw_vector(win,	(v->x + i->x * 0 + j->x * 0),	(v->x  + i->x * 1 + j->x * 0),	(v->y + i->y * 0 + j->y * 0),	(v->y  + i->y * 0 + i->y * 1));	win->color = 0x55DD55;
+	// draw_vector(win,	(v->x + i->x * 0 + j->x * 0),	(v->x  + i->x * 0 + j->x * 1),	(v->y + i->y * 0 + j->y * 0),	(v->y  + i->y * 0 + j->y * 1));	win->color = 0x5555DD;
+	// draw_vector(win,	(v->x + i->x * 0 + j->x * 0),	(v->x1 + i->x * 0 + j->x * 0),	(v->y + i->y * 0 + j->y * 0),	(v->y1 + i->y * 0 + j->y * 0));	win->color = 0x999999;
+
+	// // draw_vector(win,	(v->x + i->x * 0 + j->x * 0),	(v->x  + i->x * 0 + j->x * 0),	(v->y + i->y * 0 + j->y * 0),	(v->y  + i->y * 0 + i->y * 0));
+	
+	// draw_vector(win,	(v->x + i->x * 1 + j->x * 0),	(v->x  + i->x * 2 + j->x * 0),	(v->y + i->y * 0 + j->y * 0),	(v->y  + i->y * 0 + i->y * 1));
+	// draw_vector(win,	(v->x + i->x * 1 + j->x * 0),	(v->x  + i->x * 1 + j->x * 1),	(v->y + i->y * 0 + j->y * 1),	(v->y  + i->y * 0 + i->y * 2));
+
 	win->color = 0xDD5555;
 	draw_vector(win, win->offset_x, i->x, win->offset_y, i->y);
 	win->color = 0x55DD55;
@@ -243,7 +253,10 @@ void	draw_space(t_wind *win)
 	draw_vector(win, x, x + i->x + j->x - win->offset_x * 2, y, y + i->y + j->y - win->offset_y * 2);
 	
 	//	x
-	draw_vector(win, i->x, i->x + i->x - win->offset_x, i->y, i->y + i->y - win->offset_y);
+	draw_vector(win, i->x, i->x + i->x - win->offset_x, i->y, i->y + i->y - win->offset_y);		//	2
+
+	draw_vector(win, j->x * 2 - win->offset_x, x + j->x - win->offset_x, j->y * 2 - win->offset_y, y + j->y);	//	3
+
 	draw_vector(win, i->x, x, i->y, y);
 	draw_vector(win, i->x, x + i->x - win->offset_x, i->y, y + i->y - win->offset_y);
 
@@ -252,14 +265,13 @@ void	draw_space(t_wind *win)
 	draw_vector(win, j->x , j->x + j->x - win->offset_x, j->y, j->y + j->y - win->offset_y);
 	draw_vector(win, j->x, x + j->x - win->offset_x, j->y, y + j->y - win->offset_y);
 
-	x = x + i->x + j->x - win->offset_x * 2;
-	y = y + i->y + j->y - win->offset_y * 2;
-	draw_vector(win, x, x + i->x - win->offset_x, y, y + i->y - win->offset_y);
-	draw_vector(win, x, x + j->x - win->offset_x, y, y + j->y - win->offset_y);
-	draw_vector(win, x, x + i->x + j->x - win->offset_x * 2, y, y + i->y + j->y - win->offset_y * 2);
+	// x = x + i->x + j->x - win->offset_x * 2;
+	// y = y + i->y + j->y - win->offset_y * 2;
+	// draw_vector(win, x, x + i->x - win->offset_x, y, y + i->y - win->offset_y);
+	// draw_vector(win, x, x + j->x - win->offset_x, y, y + j->y - win->offset_y);
+	// draw_vector(win, x, x + i->x + j->x - win->offset_x * 2, y, y + i->y + j->y - win->offset_y * 2);
 
-	// 	// x
-	// draw_vector(win, x, i->x + i->x - win->offset_x, y + i->y, i->y + i->y - win->offset_y);
+		// x
 	// draw_vector(win, x, x, y, y);
 	// draw_vector(win, x, x + i->x - win->offset_x, y, y + i->y - win->offset_y);
 
