@@ -1,39 +1,55 @@
-typedef struct s_wind
-{
-	int		***map;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int		offset_x;
-	int		offset_y;
-	float	zoom;
-	int		color;
-	int		z;
-	float	angl_x;
-	float	angl_y;
-	void	*image;
-}	t_wind;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/01 14:04:58 by ccamie            #+#    #+#             */
+/*   Updated: 2022/01/01 14:04:59 by ccamie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../minilibx_macos/mlx.h"
 #include "../ft-printf/printf.h"
-#include "keys.h"
-#include <stdlib.h>
+#include "struct.h"
+
+#define	KEY_UP 5
+#define	KEY_LEFT 7
+#define	KEY_DOWN 4
+#define	KEY_RIGHT 6
+
+#define KEY_W 13
+#define KEY_A 0
+#define KEY_S 1
+#define KEY_D 2
+
 void	draw(t_wind *win);
 
 static void	rotate_x(t_wind *win, float rotate)
 {
-	ft_printf("rotate_x\n");
 	win->angl_x += rotate;
-	// win->offset_x += 20;
+	ft_printf("rotate x\n");
 }
 
 static void	rotate_y(t_wind *win, float rotate)
 {
-	ft_printf("rotate_y\n");
 	win->angl_y += rotate;
-	// if (rotate < 0)
-	// 	win->offset_y += 20;
-	// else
-	// 	win->offset_y -= 20;
+	ft_printf("rotate y\n");
+}
+
+void	rotate_mouse(t_wind *win, int key)
+{
+	if (key == KEY_UP)
+		rotate_y(win, -0.1);
+	else if (key == KEY_LEFT)
+		rotate_x(win, -0.1);
+	else if (key == KEY_DOWN)
+		rotate_y(win, 0.1);
+	else if (key == KEY_RIGHT)
+		rotate_x(win, 0.1);
+	else
+		return ;
+	draw(win);
 }
 
 void	rotate(t_wind *win, int key)
@@ -48,6 +64,5 @@ void	rotate(t_wind *win, int key)
 		rotate_x(win, 0.05);
 	else
 		return ;
-	mlx_clear_window(win->mlx_ptr, win->win_ptr);
 	draw(win);
 }

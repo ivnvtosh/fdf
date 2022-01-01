@@ -1,35 +1,35 @@
-typedef struct s_wind
-{
-	int		***map;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int		offset_x;
-	int		offset_y;
-	float	zoom;
-	int		color;
-	int		z;
-	float	angl_x;
-	float	angl_y;
-	void	*image;
-}	t_wind;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shift.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/01 14:04:36 by ccamie            #+#    #+#             */
+/*   Updated: 2022/01/01 14:04:37 by ccamie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../minilibx_macos/mlx.h"
+#include "struct.h"
 #include "../ft-printf/printf.h"
-#include "keys.h"
-#include <stdlib.h>
+
+#define KEY_UP 126
+#define KEY_LEFT 123
+#define KEY_DOWN 125
+#define KEY_RIGHT 124
+
 void	draw(t_wind *win);
 
 void	shift_x(t_wind *win, int shift)
 {
-	ft_printf("shift_x\n");
-	
 	win->offset_x += shift;
+	ft_printf("shift_x\n");
 }
 
 void	shift_y(t_wind *win, int shift)
 {
-	ft_printf("shift_y\n");
 	win->offset_y += shift;
+	ft_printf("shift_y\n");
 }
 
 void	shift(t_wind *win, int key)
@@ -44,6 +44,5 @@ void	shift(t_wind *win, int key)
 		shift_x(win, 10);
 	else
 		return ;
-	mlx_clear_window(win->mlx_ptr, win->win_ptr);
 	draw(win);
 }

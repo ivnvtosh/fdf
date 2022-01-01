@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/01 14:04:09 by ccamie            #+#    #+#             */
+/*   Updated: 2022/01/01 14:04:10 by ccamie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <math.h>
 #include "../minilibx_macos/mlx.h"
@@ -7,20 +19,7 @@
 #include "../libft/libft_bonus.h"
 #include "stdio.h"
 
-typedef struct s_wind
-{
-	int		***map;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int		offset_x;
-	int		offset_y;
-	float	zoom;
-	int		color;
-	int		z;
-	float	angl_x;
-	float	angl_y;
-	void	*image;
-}	t_wind;
+#include "struct.h"
 
 // void	draw_line_x(t_wind *win, int step_x, int step_y)
 // {
@@ -191,6 +190,7 @@ void	draw_space(t_wind *win)
 
 void	draw(t_wind *win)
 {
+	mlx_clear_window(win->mlx_ptr, win->win_ptr);
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->image, 0, 0);
 	draw_space(win);
 	// draw_map(win);

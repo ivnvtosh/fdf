@@ -19,21 +19,7 @@
 #include "../libft/libft_bonus.h"
 #include "stdio.h"
 
-typedef struct s_wind
-{
-	int		***map;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int		offset_x;
-	int		offset_y;
-	float	zoom;
-	int		color;
-	int		z;
-	float	angl_x;
-	float	angl_y;
-	void	*image;
-}	t_wind;
-
+#include "struct.h"
 
 int		***get_map(int fd);
 void	draw(t_wind *win);
@@ -72,7 +58,6 @@ void	image(t_wind *win)
 			buffer[pixel + 1] = 38;
 			buffer[pixel + 2] = 42;
 			x++;
-
 		}
 		y++;
 	}
@@ -85,11 +70,10 @@ void	ft_fdf(t_wind *win, int fd)
 	win->offset_x = 610;
 	win->offset_y = 350;
 	win->angl_x = 0;
-	win->angl_y = 0;
-	win->zoom = 10;
+	win->angl_y = 1;
+	win->zoom = 100;
 	image(win);
 	draw(win);
-	
 }
 
 // void	key_wasd(int key, t_wind *win)

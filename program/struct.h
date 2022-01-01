@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shutdown.c                                         :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/01 14:05:13 by ccamie            #+#    #+#             */
-/*   Updated: 2022/01/01 14:05:14 by ccamie           ###   ########.fr       */
+/*   Created: 2022/01/01 14:04:43 by ccamie            #+#    #+#             */
+/*   Updated: 2022/01/01 14:04:44 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft-printf/printf.h"
-#include "struct.h"
-#include <stdlib.h>
+#ifndef STRUCT_H
+# define STRUCT_H
 
-#define KEY_ESC 53
-
-void	shutdown(t_wind *win, int key)
+typedef struct s_wind
 {
-	int	***map;
-	int	x;
-	int	y;
+	int		***map;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		offset_x;
+	int		offset_y;
+	float	zoom;
+	int		color;
+	int		z;
+	float	angl_x;
+	float	angl_y;
+	void	*image;
+}	t_wind;
 
-	if (key == 53)
-	{
-		ft_printf("bye\n");
-		map = win->map;
-		y = 0;
-		while (map[y])
-		{
-			x = 0;
-			while (map[y][x])
-				free(map[y][x++]);
-			free(map[y++]);
-		}
-		free(map);
-		free(win);
-		exit(0);
-	}
-}
+#endif
