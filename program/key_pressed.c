@@ -62,7 +62,7 @@ int	key_pressed(int key, t_wind *win)
 		win->offset_y = 350;
 		win->angl_x = 0;
 		win->angl_y = -90;
-		// win->zoom = 100;
+		win->zoom = 100;
 		draw(win);
 	}
 	return (0);

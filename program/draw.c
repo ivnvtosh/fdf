@@ -271,8 +271,10 @@ void	draw_space(t_wind *win)
 			draw_vector(win, x + v->x, x + v->x1, y + v->y, y + v->y1);
 			draw_vector(win, x + win->offset_x, x + i->x, y + win->offset_y, y + i->y);
 			draw_vector(win, x + win->offset_x, x + j->x, y + win->offset_y, y + j->y);
+			// x += win->zoom;
 			x += 100;
 		}
+		// y += win->zoom;
 		y += 100;
 	}
 	win->color = 0xDD5555;
