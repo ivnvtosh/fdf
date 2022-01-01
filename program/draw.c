@@ -149,6 +149,8 @@ typedef struct s_vector
 {
 	float	x;
 	float	y;
+	float	x1;
+	float	y1;
 }	t_vector;
 
 void	draw_map(t_wind *win)
@@ -207,11 +209,13 @@ void	draw_space(t_wind *win)
 {
 	t_vector	*i;
 	t_vector	*j;
+	t_vector	*v;
 
 		// draw_vector(win, 0, 1220, y - win->offset_y / 2, y + win->offset_y / 2);
 		// draw_vector(win, 0, 1220, y - win->offset_y / 2, y + win->offset_y / 2);
 	i = malloc(sizeof(t_vector));
 	j = malloc(sizeof(t_vector));
+	v = malloc(sizeof(t_vector));
 
 	// printf("x %.10f cos %.10f cos(0) %.10f cos(1) %.10f cos(90) %.10f cos(180) %.10f cos(360) %.10f\n", win->angl_x, cos(win->angl_x), cos(0), cos(1), cos(90), cos(180), cos(360));
 
@@ -246,7 +250,37 @@ void	draw_space(t_wind *win)
 	win->color = 0x55DD55;
 	draw_vector(win, win->offset_x, j->x, win->offset_y, j->y);
 	win->color = 0x5555DD;
-	draw_vector(win, win->offset_x, i->x + j->x - win->offset_x, win->offset_y, i->y + j->y - win->offset_y);
+
+	v->x = win->offset_x;
+	v->y = win->offset_y;
+	v->x1 = i->x + j->x - win->offset_x;
+	v->y1 = i->y + j->y - win->offset_y;
+	draw_vector(win, v->x, v->x1, v->y, v->y1);
+	
+	win->color = 0x999999;
+	int	x;
+	int	y;
+
+	x = -1000;
+	y = -1000;
+	while (y < 1000)
+	{
+		x = -1000;
+		while (x < 1000)
+		{
+			draw_vector(win, x + v->x, x + v->x1, y + v->y, y + v->y1);
+			draw_vector(win, x + win->offset_x, x + i->x, y + win->offset_y, y + i->y);
+			draw_vector(win, x + win->offset_x, x + j->x, y + win->offset_y, y + j->y);
+			x += 100;
+		}
+		y += 100;
+	}
+	win->color = 0xDD5555;
+	draw_vector(win, win->offset_x, i->x, win->offset_y, i->y);
+	win->color = 0x55DD55;
+	draw_vector(win, win->offset_x, j->x, win->offset_y, j->y);
+	win->color = 0x5555DD;
+	draw_vector(win, v->x, v->x1, v->y, v->y1);
 	free(i);
 	free(j);
 }
