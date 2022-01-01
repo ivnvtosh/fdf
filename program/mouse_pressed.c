@@ -102,23 +102,24 @@ int	mouse_pressed_shift(int x, int y, t_wind *win)
 		y1 = y;
 	if (y1 - y > 50)
 		y1 = y;
-	if (y - y1 > 0)
-	{
-		win->offset_y += (y - y1);
-	}
-
-	else
-	{
-		win->offset_y -= (y1 - y) ;
-	}
 	if (x - x1 > 50)
 		x1 = x;
 	if (x1 - x > 50)
 		x1 = x;
-	if (x - x1 > 0)
+	if (y - y1 > 0)
+	{
+		win->offset_y += (y - y1);
 		win->offset_x += (x - x1);
+	}
 	else
+	{
+		win->offset_y -= (y1 - y) ;
 		win->offset_x -= (x1 - x);
+	}
+	// if (x - x1 > 0)
+	// 	win->offset_x += (x - x1);
+	// else
+	// 	win->offset_x -= (x1 - x);
 	y1 = y;
 	x1 = x;
 	ft_printf("*nothing* x-%d y-%d \n", x, y);
@@ -156,8 +157,8 @@ int	mouse_pressed(int key, int x, int y, t_wind *win)
 	ft_printf("pressed the key %d *nothing* x-%d y-%d \n", key, x, y);
 	if (key == 1)
 	{
-		// mlx_hook(win->win_ptr, 6, 0, mouse_pressed_shift, win);
-		mlx_hook(win->win_ptr, 6, 0, mouse_pressed_lol, win);
+		mlx_hook(win->win_ptr, 6, 0, mouse_pressed_shift, win);
+		// mlx_hook(win->win_ptr, 6, 0, mouse_pressed_lol, win);
 		ft_printf("pressed the key %d *left click* x-%d y-%d \n", key, x, y);
 	}
 	else if (key == 2)

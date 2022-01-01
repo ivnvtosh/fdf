@@ -25,7 +25,7 @@ void	zoom(t_wind *win, int key)
 	{
 		ft_printf("pressed the key %d *plus*\n", key);
 		win->zoom += win->zoom / 20;
-		win->offset_y -= 10;
+		// win->offset_y -= 10;
 	}
 	else if (key == KEY_MINUS )
 	{
@@ -33,7 +33,7 @@ void	zoom(t_wind *win, int key)
 		if (win->zoom != 1)
 		{
 			win->zoom -= win->zoom / 20;
-			win->offset_y += 10;
+			// win->offset_y += 10;
 		}
 	}
 	else

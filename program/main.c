@@ -82,11 +82,11 @@ void	ft_fdf(t_wind *win, int fd)
 {
 	win->map = get_map(fd);
 
-	win->offset_x = 600;
-	win->offset_y = 200;
-	win->angl_x = 1;
-	win->angl_y = 1;
-	win->zoom = 1;
+	win->offset_x = 610;
+	win->offset_y = 350;
+	win->angl_x = 0;
+	win->angl_y = 0;
+	win->zoom = 10;
 	image(win);
 	draw(win);
 	

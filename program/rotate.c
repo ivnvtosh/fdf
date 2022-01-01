@@ -39,13 +39,13 @@ static void	rotate_y(t_wind *win, float rotate)
 void	rotate(t_wind *win, int key)
 {
 	if (key == KEY_W)
-		rotate_y(win, -0.1);
+		rotate_y(win, -0.05);
 	else if (key == KEY_A)
-		rotate_x(win, -0.1);
+		rotate_x(win, -0.05);
 	else if (key == KEY_S)
-		rotate_y(win, 0.1);
+		rotate_y(win, 0.05);
 	else if (key == KEY_D)
-		rotate_x(win, 0.1);
+		rotate_x(win, 0.05);
 	else
 		return ;
 	mlx_clear_window(win->mlx_ptr, win->win_ptr);
