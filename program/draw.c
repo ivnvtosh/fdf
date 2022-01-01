@@ -210,40 +210,15 @@ void	draw_space(t_wind *win)
 	t_vector	*i;
 	t_vector	*j;
 	t_vector	*v;
+	t_vector	*s;
 
-		// draw_vector(win, 0, 1220, y - win->offset_y / 2, y + win->offset_y / 2);
-		// draw_vector(win, 0, 1220, y - win->offset_y / 2, y + win->offset_y / 2);
 	i = malloc(sizeof(t_vector));
 	j = malloc(sizeof(t_vector));
 	v = malloc(sizeof(t_vector));
-
-	// printf("x %.10f cos %.10f cos(0) %.10f cos(1) %.10f cos(90) %.10f cos(180) %.10f cos(360) %.10f\n", win->angl_x, cos(win->angl_x), cos(0), cos(1), cos(90), cos(180), cos(360));
-
-	// int	d;
-
-	// d  = 0;
-	// while (d <= 1000)
-	// {
-	// 	printf("cos(%03d) = % 3.10f\n", d, cos(d * (3.14159265358979323846 / 180)));
-	// 	d++;
-	// }
-
+	s = malloc(sizeof(t_vector));
 
 	new_vector(i, win->offset_x + win->zoom * cos(win->angl_x * (3.14159265358979323846 / 180)), win->offset_y + win->zoom * sin(win->angl_x * (3.14159265358979323846 / 180)));
 	new_vector(j, win->offset_x + win->zoom * cos(win->angl_y * (3.14159265358979323846 / 180)), win->offset_y + win->zoom * sin(win->angl_y * (3.14159265358979323846 / 180)));
-
-	win->color = 0xFFFFFF;
-	// int	y;
-
-	// y = 0;
-	// while (y < 700)
-	// {
-	// 	draw_vector(win, win->offset_x, i->x + 500, win->offset_y + y, i->y + y);
-	// 	draw_vector(win, win->offset_x + 500, i->x, win->offset_y + y, i->y + y);
-	// 	y += 50;
-	// }
-
-	// draw_vector(win, win->offset_x + 50, j->x + 50, win->offset_y + 50, j->y + 50);
 
 	win->color = 0xDD5555;
 	draw_vector(win, win->offset_x, i->x, win->offset_y, i->y);
@@ -261,28 +236,59 @@ void	draw_space(t_wind *win)
 	int	x;
 	int	y;
 
-	x = -1000;
-	y = -1000;
-	while (y < 1000)
-	{
-		x = -1000;
-		while (x < 1000)
-		{
-			draw_vector(win, x + v->x, x + v->x1, y + v->y, y + v->y1);
-			draw_vector(win, x + win->offset_x, x + i->x, y + win->offset_y, y + i->y);
-			draw_vector(win, x + win->offset_x, x + j->x, y + win->offset_y, y + j->y);
-			// x += win->zoom;
-			x += 100;
-		}
-		// y += win->zoom;
-		y += 100;
-	}
-	win->color = 0xDD5555;
-	draw_vector(win, win->offset_x, i->x, win->offset_y, i->y);
-	win->color = 0x55DD55;
-	draw_vector(win, win->offset_x, j->x, win->offset_y, j->y);
-	win->color = 0x5555DD;
-	draw_vector(win, v->x, v->x1, v->y, v->y1);
+	x = v->x1;
+	y = v->y1;
+	draw_vector(win, x, x + i->x - win->offset_x, y, y + i->y - win->offset_y);
+	draw_vector(win, x, x + j->x - win->offset_x, y, y + j->y - win->offset_y);
+	draw_vector(win, x, x + i->x + j->x - win->offset_x * 2, y, y + i->y + j->y - win->offset_y * 2);
+	
+	//	x
+	draw_vector(win, i->x, i->x + i->x - win->offset_x, i->y, i->y + i->y - win->offset_y);
+	draw_vector(win, i->x, x, i->y, y);
+	draw_vector(win, i->x, x + i->x - win->offset_x, i->y, y + i->y - win->offset_y);
+
+	//	y
+	draw_vector(win, j->x, x, j->y, y);
+	draw_vector(win, j->x , j->x + j->x - win->offset_x, j->y, j->y + j->y - win->offset_y);
+	draw_vector(win, j->x, x + j->x - win->offset_x, j->y, y + j->y - win->offset_y);
+
+	x = x + i->x + j->x - win->offset_x * 2;
+	y = y + i->y + j->y - win->offset_y * 2;
+	draw_vector(win, x, x + i->x - win->offset_x, y, y + i->y - win->offset_y);
+	draw_vector(win, x, x + j->x - win->offset_x, y, y + j->y - win->offset_y);
+	draw_vector(win, x, x + i->x + j->x - win->offset_x * 2, y, y + i->y + j->y - win->offset_y * 2);
+
+	// 	// x
+	// draw_vector(win, x, i->x + i->x - win->offset_x, y + i->y, i->y + i->y - win->offset_y);
+	// draw_vector(win, x, x, y, y);
+	// draw_vector(win, x, x + i->x - win->offset_x, y, y + i->y - win->offset_y);
+
+
+	// v->x = win->offset_x;
+	// v->y = win->offset_y;
+	// v->x1 = win->offset_x + win->zoom;
+	// v->y1 = win->offset_y - win->zoom;
+	// win->color = 0x5555DD;
+	// draw_vector(win, v->x, v->x1, v->y, v->y1);
+
+	// new_vector(i, win->zoom * cos(win->angl_x * (3.14159265358979323846 / 180)), win->zoom * sin(win->angl_x * (3.14159265358979323846 / 180)));
+	// new_vector(j, win->zoom * cos(win->angl_y * (3.14159265358979323846 / 180)), win->zoom * sin(win->angl_y * (3.14159265358979323846 / 180)));
+
+	// win->color = 0xDD5555;
+	// draw_vector(win, v->x1, v->x1 + i->x, v->y1, v->y1 + i->y);
+	// win->color = 0x55DD55;
+	// draw_vector(win, v->x1, v->x1 + j->x, v->y1,  v->y1 + j->y);
+
+	// s->x = v->x1;
+	// s->y = v->y1;
+	// s->x1 = v->x1 + i->x + j->x;
+	// s->y1 = v->y1 + i->y + j->y;
+	// win->color = 0x5555DD;
+	// draw_vector(win, s->x, s->x1, s->y, s->y1);
+
+	// win->color = 0x999999;
+	// draw_vector(win, s->x + i->x, s->x + i->x*2, i->y, i->y);
+
 	free(i);
 	free(j);
 }
