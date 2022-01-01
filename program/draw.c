@@ -17,7 +17,7 @@
 #include "../get-next-line/get_next_line.h"
 #include "../libft/libft.h"
 #include "../libft/libft_bonus.h"
-#include "stdio.h"
+#include <stdio.h>
 
 #include "struct.h"
 
@@ -52,6 +52,47 @@
 // 		x--;
 // 	}
 // }
+
+void	panel_status(t_wind *win)
+{
+	char *s;
+
+	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->panel, win->width / 10 * 9 - 100, 10);
+
+	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 - 80, 20, 0xAAAAAA, "x");
+	s = ft_itoa(-win->angl_x);
+	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 - 60, 20, 0xAAAAAA, s);
+	free(s);
+
+	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 - 80, 40, 0xAAAAAA, "y");
+	s = ft_itoa(-win->angl_y - 90);
+	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 - 60, 40, 0xAAAAAA, s);
+	free(s);
+
+
+
+
+	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9, 20, 0xAAAAAA, "x");
+	s = ft_itoa(win->offset_x - 610);
+	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 + 20, 20, 0xAAAAAA, s);
+	free(s);
+
+
+	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9, 40, 0xAAAAAA, "y");
+	s = ft_itoa(win->offset_y - 350);
+	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 + 20, 40, 0xAAAAAA, s);
+	free(s);
+
+
+
+
+	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 - 80, 80, 0xAAAAAA, "zoom");
+	s = ft_itoa(win->zoom);
+	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 - 20, 80, 0xAAAAAA, s);
+	free(s);
+
+}
+
 int	ft_max(float step_x, float step_y)
 {
 	if (step_x < 0)
@@ -103,12 +144,6 @@ void	draw_line_x(t_wind *win, float x1, float y1, float x2, float y2)
 		// color += z1;
 	}
 }
-
-
-//	1220 700
-
-// mlx_pixel_put(win->mlx_ptr, win->win_ptr, x, y, 0xFFFFFF);
-	
 
 typedef struct s_vector
 {
@@ -178,20 +213,57 @@ void	draw_space(t_wind *win)
 	i = malloc(sizeof(t_vector));
 	j = malloc(sizeof(t_vector));
 
-	win->color = 0xFFFFFF;
-	new_vector(i, win->offset_x + win->zoom * cos(win->angl_x), win->offset_y + win->zoom * sin(win->angl_x));
-	new_vector(j, win->offset_x + win->zoom * cos(win->angl_y), win->offset_y + win->zoom * sin(win->angl_y));
-	draw_vector(win, win->offset_x, i->x, win->offset_y, i->y);
-	draw_vector(win, win->offset_x, j->x, win->offset_y, j->y);
+	// printf("x %.10f cos %.10f cos(0) %.10f cos(1) %.10f cos(90) %.10f cos(180) %.10f cos(360) %.10f\n", win->angl_x, cos(win->angl_x), cos(0), cos(1), cos(90), cos(180), cos(360));
 
+	// int	d;
+
+	// d  = 0;
+	// while (d <= 1000)
+	// {
+	// 	printf("cos(%03d) = % 3.10f\n", d, cos(d * (3.14159265358979323846 / 180)));
+	// 	d++;
+	// }
+
+
+	new_vector(i, win->offset_x + win->zoom * cos(win->angl_x * (3.14159265358979323846 / 180)), win->offset_y + win->zoom * sin(win->angl_x * (3.14159265358979323846 / 180)));
+	new_vector(j, win->offset_x + win->zoom * cos(win->angl_y * (3.14159265358979323846 / 180)), win->offset_y + win->zoom * sin(win->angl_y * (3.14159265358979323846 / 180)));
+
+	win->color = 0xFFFFFF;
+	// int	y;
+
+	// y = 0;
+	// while (y < 700)
+	// {
+	// 	draw_vector(win, win->offset_x, i->x + 500, win->offset_y + y, i->y + y);
+	// 	draw_vector(win, win->offset_x + 500, i->x, win->offset_y + y, i->y + y);
+	// 	y += 50;
+	// }
+
+	// draw_vector(win, win->offset_x + 50, j->x + 50, win->offset_y + 50, j->y + 50);
+
+	win->color = 0xDD5555;
+	draw_vector(win, win->offset_x, i->x, win->offset_y, i->y);
+	win->color = 0x55DD55;
+	draw_vector(win, win->offset_x, j->x, win->offset_y, j->y);
+	win->color = 0x5555DD;
+	draw_vector(win, win->offset_x, i->x + j->x - win->offset_x, win->offset_y, i->y + j->y - win->offset_y);
 	free(i);
 	free(j);
 }
+
+
 
 void	draw(t_wind *win)
 {
 	mlx_clear_window(win->mlx_ptr, win->win_ptr);
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->image, 0, 0);
+
+	
 	draw_space(win);
 	// draw_map(win);
+
+
+
+	if (win->draw_panel == 1)
+		panel_status(win);
 }

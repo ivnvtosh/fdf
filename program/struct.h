@@ -15,17 +15,26 @@
 
 typedef struct s_wind
 {
-	int		***map;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		offset_x;
-	int		offset_y;
-	float	zoom;
-	int		color;
-	int		z;
+	int		width;
+	int		height;
+	void	*image;
+	void	*panel;
+	int		draw_panel;
+	int		***map;
+	float	offset_x;
+	float	offset_y;
+
 	float	angl_x;
 	float	angl_y;
-	void	*image;
+
+	float	zoom;
+
+	int		color;
+
+	int		z;
+
 }	t_wind;
 
 #endif

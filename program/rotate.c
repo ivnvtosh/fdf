@@ -40,13 +40,13 @@ static void	rotate_y(t_wind *win, float rotate)
 void	rotate_mouse(t_wind *win, int key)
 {
 	if (key == KEY_UP)
-		rotate_y(win, -0.1);
+		rotate_y(win, -5);
 	else if (key == KEY_LEFT)
-		rotate_x(win, -0.1);
+		rotate_x(win, -5);
 	else if (key == KEY_DOWN)
-		rotate_y(win, 0.1);
+		rotate_y(win, 5);
 	else if (key == KEY_RIGHT)
-		rotate_x(win, 0.1);
+		rotate_x(win, 5);
 	else
 		return ;
 	draw(win);
@@ -55,13 +55,13 @@ void	rotate_mouse(t_wind *win, int key)
 void	rotate(t_wind *win, int key)
 {
 	if (key == KEY_W)
-		rotate_y(win, -0.05);
+		rotate_y(win, -5);
 	else if (key == KEY_A)
-		rotate_x(win, -0.05);
+		rotate_x(win, -5);
 	else if (key == KEY_S)
-		rotate_y(win, 0.05);
+		rotate_y(win, 5);
 	else if (key == KEY_D)
-		rotate_x(win, 0.05);
+		rotate_x(win, 5);
 	else
 		return ;
 	draw(win);

@@ -63,59 +63,61 @@ void	image(t_wind *win)
 	}
 }
 
+void	panel(t_wind *win)
+{
+	void	*panel;
+	char	*buffer;
+	int		color;
+	int 	pixel_bits;
+	int		line_bytes;
+	int		endian;
+	int		x;
+	int		y;
+	int 	pixel;
+
+	color = 0xABCDEF;
+	pixel_bits = 32;
+	line_bytes = 500;
+	endian = 10;
+	panel = mlx_new_image(win->mlx_ptr, 190, 100);
+	buffer = mlx_get_data_addr(panel, &pixel_bits, &line_bytes, &endian);
+	win->panel = panel;
+	y = 0;
+	// color = mlx_get_color_value(win->mlx_ptr, color);
+	while (y < 100)
+	{
+		x = 0;
+		while (x < 200)
+		{
+			pixel = (y * line_bytes) + (x * 4);
+			
+			buffer[pixel] = 54;
+			buffer[pixel + 1] = 44;
+			buffer[pixel + 2] = 48;
+			x++;
+		}
+		y++;
+	}
+}
+
 void	ft_fdf(t_wind *win, int fd)
 {
 	win->map = get_map(fd);
 
+	win->draw_panel = 1;
 	win->offset_x = 610;
 	win->offset_y = 350;
 	win->angl_x = 0;
-	win->angl_y = 1;
+	win->angl_y = -90;
 	win->zoom = 100;
 	image(win);
+	panel(win);
 	draw(win);
-}
-
-// void	key_wasd(int key, t_wind *win)
-// {
-// 	if (key == KEY_W)
-// 	{
-// 		win->angl_y -= 0.1;
-// 		win->offset_y += 20;
-// 		ft_printf("pressed the key %d *W*\n", key);
-// 	}
-// 	else if (key == KEY_A)
-// 	{
-// 		win->angl_x -= 0.1;
-// 		ft_printf("pressed the key %d *A*\n", key);
-// 	}
-// 	else if (key == KEY_S)
-// 	{
-// 		win->angl_y += 0.1;
-// 		win->offset_y -= 20;
-// 		ft_printf("pressed the key %d *S*\n", key);
-// 	}
-// 	else if (key == KEY_D)
-// 	{
-// 		win->angl_x += 0.1;
-// 		ft_printf("pressed the key %d *D*\n", key);
-// 	}
-// 	mlx_clear_window(win->mlx_ptr, win->win_ptr);
-// 	draw(win);
-// }
-
-
-int		key_pressed_re(int key, t_wind *win)
-{
-	ft_printf("key_pressed_re\n");
-	(void)win;
-	return (key);
 }
 
 int		mouse_pressed_re(int key, int x, int y, t_wind *win)
 {
 	mlx_hook(win->win_ptr, 6, 0, NULL, win);
-	ft_printf("mouse_pressed_re\n");
 	(void)x;
 	(void)y;
 	(void)win;
@@ -135,13 +137,12 @@ int	main(int argc, char **argv)
 	win = (t_wind *)malloc(sizeof(t_wind));
 	if (win == NULL)
 		return (1);
+	win->width = 1220;
+	win->height = 700;
 	win->mlx_ptr = mlx_init();
-	// win->win_ptr = mlx_new_window(win->mlx_ptr, 1920, 1080, "FDF");
-	win->win_ptr = mlx_new_window(win->mlx_ptr, 1220, 700, "FDF");
-	// mlx_string_put(win->mlx_ptr, win->win_ptr, 20, 10, 0xe2e2e2, &argv[1][10]);
+	win->win_ptr = mlx_new_window(win->mlx_ptr, win->width, win->height, "FDF");
 	mlx_do_key_autorepeaton(win->mlx_ptr);
 	mlx_hook(win->win_ptr, 2, 0, key_pressed, win);
-	mlx_hook(win->win_ptr, 3, 0, key_pressed_re, win);
 	mlx_hook(win->win_ptr, 4, 0, mouse_pressed, win);
 	mlx_hook(win->win_ptr, 5, 0, mouse_pressed_re, win);
 	

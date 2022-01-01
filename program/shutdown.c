@@ -19,23 +19,19 @@
 void	shutdown(t_wind *win, int key)
 {
 	int	***map;
-	int	x;
-	int	y;
 
-	if (key == 53)
-	{
-		ft_printf("bye\n");
-		map = win->map;
-		y = 0;
-		while (map[y])
-		{
-			x = 0;
-			while (map[y][x])
-				free(map[y][x++]);
-			free(map[y++]);
-		}
-		free(map);
-		free(win);
-		exit(0);
-	}
+	if (key != 53)
+		return ;
+	map = win->map;
+	// while (*map)
+	// {
+	// 	while (**map)
+	// 		free(*(*map)++);
+	// 	map++;
+	// 	// free(*map++);
+	// }
+	free(win->map);
+	free(win);
+	ft_printf("bye\n");
+	exit(0);
 }
