@@ -24,63 +24,47 @@ void	draw(t_wind *win);
 void	rotate_mouse(t_wind *win, int key);
 void	zoom_mouse(t_wind *win, int key);
 
-int	mouse_pressed_lol(int x, int y, t_wind *win)
+int	mouse_pressed_lol(int x1, int y1, t_wind *win)
 {
-	static int	x1;
-	static int	y1;
+	int	x;
+	int	y;
 
-	if (y - y1 > 100)
-		y1 = y;
-	if (y1 - y > 100)
-		y1 = y;
+	x = win->mouse_x;
+	y = win->mouse_y;
 	if (y - y1 > 0)
-		win->angl_y += (y - y1) * 0.01;
+		win->angl_y += (y1 - y) * 0.1;
 	else
-		win->angl_y -= (y1 - y) * 0.01;
-	if (x - x1 > 100)
-		x1 = x;
-	if (x1 - x > 100)
-		x1 = x;
+		win->angl_y -= (y - y1) * 0.1;
 	if (x - x1 > 0)
-		win->angl_x += (x - x1) * 0.01;
+		win->angl_x -= (x1 - x) * 0.1;
 	else
-		win->angl_x -= (x1 - x) * 0.01;
-	y1 = y;
-	x1 = x;
+		win->angl_x += (x - x1) * 0.1;
+	win->mouse_x = x1;
+	win->mouse_y = y1;
 	ft_printf("angle\n");
 	draw(win);
 	return (x + y);
 }
 
-int	mouse_pressed_shift(int x, int y, t_wind *win)
+int	mouse_pressed_shift(int x1, int y1, t_wind *win)
 {
-	static int	x1;
-	static int	y1;
+	int	x;
+	int	y;
 
-	if (y - y1 > 50)
-		y1 = y;
-	if (y1 - y > 50)
-		y1 = y;
-	if (x - x1 > 50)
-		x1 = x;
-	if (x1 - x > 50)
-		x1 = x;
+	x = win->mouse_x;
+	y = win->mouse_y;
 	if (y - y1 > 0)
 	{
-		win->offset_y += (y - y1);
-		win->offset_x += (x - x1);
+		win->offset_y -= (y - y1);
+		win->offset_x -= (x - x1);
 	}
 	else
 	{
-		win->offset_y -= (y1 - y) ;
-		win->offset_x -= (x1 - x);
+		win->offset_y += (y1 - y);
+		win->offset_x += (x1 - x);
 	}
-	// if (x - x1 > 0)
-	// 	win->offset_x += (x - x1);
-	// else
-	// 	win->offset_x -= (x1 - x);
-	y1 = y;
-	x1 = x;
+	win->mouse_x = x1;
+	win->mouse_y = y1;
 	ft_printf("shift\n");
 	draw(win);
 	return (x + y);
@@ -92,12 +76,16 @@ int	mouse_pressed(int key, int x, int y, t_wind *win)
 {
 	if (key == 1)
 	{
+		win->mouse_x = x;
+		win->mouse_y = y;
 		mlx_hook(win->win_ptr, 6, 0, mouse_pressed_shift, win);
 		// mlx_hook(win->win_ptr, 6, 0, mouse_pressed_lol, win);
 		ft_printf("pressed the key %d *left click* x-%d y-%d \n", key, x, y);
 	}
 	else if (key == 2)
 	{
+		win->mouse_x = x;
+		win->mouse_y = y;
 		mlx_hook(win->win_ptr, 6, 0, mouse_pressed_lol, win);
 		ft_printf("pressed the key %d *right click* x-%d y-%d \n", key, x, y);
 	}

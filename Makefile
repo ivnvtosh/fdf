@@ -26,6 +26,8 @@ SRCS		=	get-next-line/get_next_line_utils.c	\
 				program/shift.c						\
 				program/shutdown.c					\
 				program/zoom.c						\
+				program/draw_plane.c				\
+				program/draw_status_panel.c			\
 				program/main.c
 				
 

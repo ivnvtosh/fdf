@@ -29,6 +29,12 @@ typedef struct s_wind
 	float	angl_x;
 	float	angl_y;
 
+	float	centre_x;
+	float	centre_y;
+	
+	float	mouse_x;
+	float	mouse_y;
+	
 	float	zoom;
 
 	int		color;

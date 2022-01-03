@@ -108,8 +108,25 @@ void	ft_fdf(t_wind *win, int fd)
 	win->offset_x = 610;
 	win->offset_y = 350;
 	win->angl_x = 0;
-	win->angl_y = -90;
-	win->zoom = 100;
+	win->angl_y = -210;
+
+
+	int	x1;
+	int	y1;
+	int ***map;
+
+	map = win->map;
+	y1 = 0;
+	while (map[y1])
+	{
+		x1 = 0;
+		while (map[y1][x1])
+			x1++;
+		y1++;
+	}
+	win->centre_x = x1 / 2;
+	win->centre_y = y1 / 2;
+	win->zoom = 800 / (x1 + y1) + 1;
 	image(win);
 	panel(win);
 	draw(win);

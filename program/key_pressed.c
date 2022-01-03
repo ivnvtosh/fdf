@@ -36,9 +36,9 @@ static void	rotate_y(t_wind *win, float rotate)
 void	rotate_z(t_wind *win, int key)
 {
 	if (key == 12)
-		rotate_y(win, -5);
+		rotate_y(win, 5);
 	else if (key == 14)
-		rotate_x(win, 5);
+		rotate_x(win, -5);
 	else
 		return ;
 	draw(win);
@@ -61,8 +61,8 @@ int	key_pressed(int key, t_wind *win)
 		win->offset_x = 610;
 		win->offset_y = 350;
 		win->angl_x = 0;
-		win->angl_y = -90;
-		win->zoom = 100;
+		win->angl_y = -210;
+		win->zoom = 800 / (win->centre_x * 2 + win->centre_y * 2) + 1;
 		draw(win);
 	}
 	return (0);
