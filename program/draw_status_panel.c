@@ -33,7 +33,7 @@ void	status_panel(t_wind *win)
 	free(s);
 
 	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 - 80, 80, 0xAAAAAA, "zoom");
-	s = ft_itoa(win->zoom);
+	s = ft_itoa(win->zoom * 10);
 	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 - 20, 80, 0xAAAAAA, s);
 	free(s);
 

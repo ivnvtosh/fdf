@@ -28,6 +28,9 @@ typedef struct s_wind
 
 	float	angl_x;
 	float	angl_y;
+	float	angl_z;
+
+	int		step;
 
 	float	centre_x;
 	float	centre_y;

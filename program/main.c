@@ -109,8 +109,8 @@ void	ft_fdf(t_wind *win, int fd)
 	win->offset_y = 350;
 	win->angl_x = 0;
 	win->angl_y = -210;
-
-
+	win->angl_z = -90;
+	
 	int	x1;
 	int	y1;
 	int ***map;
@@ -126,6 +126,10 @@ void	ft_fdf(t_wind *win, int fd)
 	}
 	win->centre_x = x1 / 2;
 	win->centre_y = y1 / 2;
+	if (x1 == 500 && y1 == 499)
+		win->step = 2;
+	else
+		win->step = 1;
 	win->zoom = 800 / (x1 + y1) + 1;
 	image(win);
 	panel(win);

@@ -21,14 +21,16 @@ void	draw(t_wind *win);
 
 static void	rotate_x(t_wind *win, float rotate)
 {
-	ft_printf("rotate x\n");
+	ft_printf("rotate z\n");
+	// win->angl_z += rotate;
 	win->angl_x += rotate;
 	win->angl_y += rotate;
 }
 
 static void	rotate_y(t_wind *win, float rotate)
 {
-	ft_printf("rotate y\n");
+	ft_printf("rotate z\n");
+	// win->angl_z += rotate;
 	win->angl_x += rotate;
 	win->angl_y += rotate;
 }
@@ -62,6 +64,7 @@ int	key_pressed(int key, t_wind *win)
 		win->offset_y = 350;
 		win->angl_x = 0;
 		win->angl_y = -210;
+		win->angl_z = -90;
 		win->zoom = 800 / (win->centre_x * 2 + win->centre_y * 2) + 1;
 		draw(win);
 	}

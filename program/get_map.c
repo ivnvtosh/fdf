@@ -24,11 +24,11 @@ t_list	*read_map(int fd)
 	t_list	*start;
 	char	*s;
 
-	ft_printf("------------------------read-------------------------\n");
+	// ft_printf("------------------------read-------------------------\n");
 	s = get_next_line(fd);
 	if (s == NULL)
 		return (NULL);
-	ft_printf("%s", s);
+	// ft_printf("%s", s);
 	lst_str = ft_lstnew(s);
 	if (lst_str == NULL)
 		return (NULL);
@@ -36,7 +36,7 @@ t_list	*read_map(int fd)
 	s = get_next_line(fd);
 	while (s)
 	{
-		ft_printf("%s", s);
+		// ft_printf("%s", s);
 		lst_str->next = ft_lstnew(s);
 		if (lst_str->next == NULL)
 		{
@@ -46,7 +46,7 @@ t_list	*read_map(int fd)
 		lst_str = lst_str->next;
 		s = get_next_line(fd);
 	}
-	ft_printf("\n");
+	// ft_printf("\n");
 	lst_str->next = NULL;
 	return (start);
 }
@@ -256,10 +256,10 @@ int	***get_map(int fd)
 	int		***map;
 
 	lst_s = read_map(fd);
-	print_stringg(lst_s);
+	// print_stringg(lst_s);
 	map_s = split_map(lst_s);
-	print_split(map_s);
+	// print_split(map_s);
 	map = atoi_map(map_s);
-	print_atoi(map);
+	// print_atoi(map);
 	return (map);
 }
