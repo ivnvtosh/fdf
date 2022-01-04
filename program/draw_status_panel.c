@@ -1,8 +1,4 @@
-#include <stdlib.h>
-#include "../minilibx_macos/mlx.h"
-#include "../libft/libft.h"
-#include "../libft/libft_bonus.h"
-#include "struct.h"
+#include "fdf.h"
 
 void	status_panel(t_wind *win)
 {
@@ -36,5 +32,4 @@ void	status_panel(t_wind *win)
 	s = ft_itoa(win->zoom * 10);
 	mlx_string_put(win->mlx_ptr, win->win_ptr, win->width / 10 * 9 - 20, 80, 0xAAAAAA, s);
 	free(s);
-
 }

@@ -10,13 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "../minilibx_macos/mlx.h"
-#include "../ft-printf/printf.h"
-#include "../get-next-line/get_next_line.h"
-#include "../libft/libft.h"
-#include "../libft/libft_bonus.h"
-#include "stdio.h"
+#include "fdf.h"
 
 t_list	*read_map(int fd)
 {
@@ -24,7 +18,7 @@ t_list	*read_map(int fd)
 	t_list	*start;
 	char	*s;
 
-	// ft_printf("------------------------read-------------------------\n");
+	// ft_printf("------------------------read-------------2------------\n");
 	s = get_next_line(fd);
 	if (s == NULL)
 		return (NULL);

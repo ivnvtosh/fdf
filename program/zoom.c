@@ -10,35 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft-printf/printf.h"
-#include "struct.h"
-
-#define	KEY_UP 5
-#define	KEY_DOWN 4
-
-#define KEY_PLUS 24
-#define KEY_MINUS 27
-
-void	draw(t_wind *win);
-
-void	zoom_plus(t_wind *win)
-{
-	win->zoom += win->zoom / 20;
-	ft_printf("zoom plus\n");
-}
-
-void	zoom_minus(t_wind *win)
-{
-	win->zoom -= win->zoom / 20;
-	ft_printf("zoom minus\n");
-}
+#include "fdf.h"
 
 void	zoom_mouse(t_wind *win, int key)
 {
-	if (key == KEY_UP)
-		zoom_plus(win);
-	else if (key == KEY_DOWN)
-		zoom_minus(win);
+	if (key == MOUSE_UP)
+		win->zoom += win->zoom / 20;
+	else if (key == MOUSE_DOWN)
+		win->zoom -= win->zoom / 20;
 	else
 		return ;
 	draw(win);
@@ -47,9 +26,9 @@ void	zoom_mouse(t_wind *win, int key)
 void	zoom(t_wind *win, int key)
 {
 	if (key == KEY_PLUS)
-		zoom_plus(win);
+		win->zoom += win->zoom / 20;
 	else if (key == KEY_MINUS )
-		zoom_minus(win);
+		win->zoom -= win->zoom / 20;
 	else
 		return ;
 	draw(win);

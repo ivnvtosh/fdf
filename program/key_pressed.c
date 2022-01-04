@@ -10,18 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft-printf/printf.h"
-#include "struct.h"
-
-void	rotate(t_wind *win, int key);
-void	shift(t_wind *win, int key);
-void	shutdown(t_wind *win, int key);
-void	zoom(t_wind *win, int key);
-void	draw(t_wind *win);
+#include "fdf.h"
 
 static void	rotate_x(t_wind *win, float rotate)
 {
-	ft_printf("rotate z\n");
 	// win->angl_z += rotate;
 	win->angl_x += rotate;
 	win->angl_y += rotate;
@@ -29,7 +21,6 @@ static void	rotate_x(t_wind *win, float rotate)
 
 static void	rotate_y(t_wind *win, float rotate)
 {
-	ft_printf("rotate z\n");
 	// win->angl_z += rotate;
 	win->angl_x += rotate;
 	win->angl_y += rotate;

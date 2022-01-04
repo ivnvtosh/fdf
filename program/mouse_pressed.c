@@ -10,19 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft-printf/printf.h"
-#include "struct.h"
-#include "../minilibx_macos/mlx.h"
-#include <math.h>
-
-#define	UP 5
-#define	LEFT 7
-#define	DOWN 4
-#define	RIGHT 6
-
-void	draw(t_wind *win);
-void	rotate_mouse(t_wind *win, int key);
-void	zoom_mouse(t_wind *win, int key);
+#include "fdf.h"
 
 int	mouse_pressed_lol(int x1, int y1, t_wind *win)
 {
@@ -41,7 +29,6 @@ int	mouse_pressed_lol(int x1, int y1, t_wind *win)
 		win->angl_x += (x - x1) * 0.1;
 	win->mouse_x = x1;
 	win->mouse_y = y1;
-	ft_printf("angle\n");
 	draw(win);
 	return (x + y);
 }
@@ -65,31 +52,19 @@ int	mouse_pressed_shift(int x1, int y1, t_wind *win)
 	}
 	win->mouse_x = x1;
 	win->mouse_y = y1;
-	ft_printf("shift\n");
 	draw(win);
 	return (x + y);
 }
 
-
-
 int	mouse_pressed(int key, int x, int y, t_wind *win)
 {
+	win->mouse_x = x;
+	win->mouse_y = y;
 	if (key == 1)
-	{
-		win->mouse_x = x;
-		win->mouse_y = y;
 		mlx_hook(win->win_ptr, 6, 0, mouse_pressed_shift, win);
-		// mlx_hook(win->win_ptr, 6, 0, mouse_pressed_lol, win);
-		ft_printf("pressed the key %d *left click* x-%d y-%d \n", key, x, y);
-	}
 	else if (key == 2)
-	{
-		win->mouse_x = x;
-		win->mouse_y = y;
 		mlx_hook(win->win_ptr, 6, 0, mouse_pressed_lol, win);
-		ft_printf("pressed the key %d *right click* x-%d y-%d \n", key, x, y);
-	}
-	// rotate_mouse(win, key);
-	zoom_mouse(win, key);
+	else
+		zoom_mouse(win, key);
 	return (0);
 }

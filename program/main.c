@@ -10,21 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <stdlib.h>
-#include "../minilibx_macos/mlx.h"
-#include "../ft-printf/printf.h"
-#include "../get-next-line/get_next_line.h"
-#include "../libft/libft.h"
-#include "../libft/libft_bonus.h"
-#include "stdio.h"
-
-#include "struct.h"
-
-int		***get_map(int fd);
-void	draw(t_wind *win);
-int		key_pressed(int key, t_wind *win);
-int		mouse_pressed(int key, int x, int y, t_wind *win);
+#include "fdf.h"
 
 void	image(t_wind *win)
 {

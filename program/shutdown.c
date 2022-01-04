@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft-printf/printf.h"
-#include "struct.h"
-#include <stdlib.h>
-
-#define KEY_ESC 53
+#include "fdf.h"
 
 void	shutdown(t_wind *win, int key)
 {

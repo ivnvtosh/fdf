@@ -10,43 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft-printf/printf.h"
-#include "struct.h"
-
-#define	KEY_UP 5
-#define	KEY_LEFT 7
-#define	KEY_DOWN 4
-#define	KEY_RIGHT 6
-
-#define KEY_W 13
-#define KEY_A 0
-#define KEY_S 1
-#define KEY_D 2
-
-void	draw(t_wind *win);
-
-static void	rotate_x(t_wind *win, float rotate)
-{
-	win->angl_x += rotate;
-	ft_printf("rotate x\n");
-}
-
-static void	rotate_y(t_wind *win, float rotate)
-{
-	win->angl_y += rotate;
-	ft_printf("rotate y\n");
-}
+#include "fdf.h"
 
 void	rotate_mouse(t_wind *win, int key)
 {
 	if (key == KEY_UP)
-		rotate_y(win, -5);
+		win->angl_y -= 5;
 	else if (key == KEY_LEFT)
-		rotate_x(win, -5);
+		win->angl_x -= 5;
 	else if (key == KEY_DOWN)
-		rotate_y(win, 5);
+		win->angl_y += 5;
 	else if (key == KEY_RIGHT)
-		rotate_x(win, 5);
+		win->angl_x += 5;
 	else
 		return ;
 	draw(win);
@@ -55,13 +30,13 @@ void	rotate_mouse(t_wind *win, int key)
 void	rotate(t_wind *win, int key)
 {
 	if (key == KEY_W)
-		rotate_y(win, -5);
+		win->angl_y -= 5;
 	else if (key == KEY_A)
-		rotate_x(win, -5);
+		win->angl_x -= 5;
 	else if (key == KEY_S)
-		rotate_y(win, 5);
+		win->angl_y += 5;
 	else if (key == KEY_D)
-		rotate_x(win, 5);
+		win->angl_x += 5;
 	else
 		return ;
 	draw(win);

@@ -1,16 +1,5 @@
 
-
-#include <stdlib.h>
-#include <math.h>
-#include "../minilibx_macos/mlx.h"
-#include "../ft-printf/printf.h"
-#include "../get-next-line/get_next_line.h"
-#include "../libft/libft.h"
-#include "../libft/libft_bonus.h"
-#include <stdio.h>
-
-#include "struct.h"
-#define RADIAN 0.01745329252
+#include "fdf.h"
 
 static int	ft_max(float step_x, float step_y)
 {
