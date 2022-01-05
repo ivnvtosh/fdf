@@ -50,24 +50,15 @@ void	draw_plane(t_wind *win)
 
 	v.ox = win->offset_x;
 	v.oy = win->offset_y;
-	v.ix = +1 * win->zoom * cos(win->angl_x * RADIAN);
-	v.iy = -1 * win->zoom * sin(win->angl_x * RADIAN);
+	v.ix = 1 * win->zoom;
+	v.iy = 0;
 
-	v.jx = -1 * win->zoom * sin(win->angl_y * RADIAN);
-	v.jy = -1 * win->zoom * cos(win->angl_y * RADIAN);
+	v.jx = 0;
+	v.jy = 1 * win->zoom;
 
-	v.kx = -1 * win->zoom * sin(win->angl_x * RADIAN) ;
-	v.ky = -1 * win->zoom * cos(win->angl_x * RADIAN) ;
-	// v.kx = v.ix + v.jx;
-	// v.ky = v.iy + v.jy;
-	// v.kx = +1 * win->zoom * cos(win->angl_z * RADIAN) + -0 * win->zoom * sin(win->angl_z * RADIAN);
-	// v.ky = +1 * win->zoom * sin(win->angl_z * RADIAN) + +0 * win->zoom * cos(win->angl_z * RADIAN);
-	// v.kx = -1 * win->zoom * cos((win->angl_x + win->angl_y) * RADIAN) + 1 * win->zoom * sin((win->angl_x + win->angl_y) * RADIAN);
-	// v.ky = -1 * win->zoom * sin((win->angl_x + win->angl_y) * RADIAN) + 1 * win->zoom * cos((win->angl_x + win->angl_y) * RADIAN);
-	// v.kx = +1 * win->zoom * cos(win->angl_z * RADIAN) * cos(win->angl_x * RADIAN) - +1 * win->zoom * sin(win->angl_y * RADIAN) * sin(win->angl_y * RADIAN);
-	// v.ky = +1 * win->zoom * sin(win->angl_x * RADIAN) * sin(win->angl_x * RADIAN) - +1 * win->zoom * cos(win->angl_y * RADIAN) * cos(win->angl_y * RADIAN);
-	// x'=x*cos(L)-y*sin(L);
-	// y'=-x*sin(L)+y*cos(L);
+	// v.kx = -1 * win->zoom * sin(win->angl_x * RADIAN) ;
+	// v.ky = -1 * win->zoom * cos(win->angl_x * RADIAN) ;
+
 	win->color = 0x444444;
 	draw_line(win, 0, 0, v.ox, v.oy);
 	win->color = 0x5555DD;
@@ -79,11 +70,7 @@ void	draw_plane(t_wind *win)
 
 	map = win->map;
 	y = 0;
-	if (win->zoom < 0.2)
-		step = 10;
-	else if (win->zoom < 0.6)
-		step = 5;
-	else if (win->zoom < 6)
+	if (win->zoom < 6)
 		step = win->step;
 	else
 		step = 1;
@@ -92,8 +79,8 @@ void	draw_plane(t_wind *win)
 		x = 0;
 		while (map[y][x])
 		{
-			v.tx = v.ox + v.ix * (x - win->centre_x) + v.jx * (y - win->centre_y) + v.kx * map[y][x][0];
-			v.ty = v.oy + v.iy * (x - win->centre_x) + v.jy * (y - win->centre_y) + v.ky * map[y][x][0];
+			v.tx = v.ox + v.ix * (x - win->centre_x) + v.jx * (y - win->centre_y);
+			v.ty = v.oy + v.iy * (x - win->centre_x) + v.jy * (y - win->centre_y) - 1 * map[y][x][0];
 			// if (v.tx >= 305 && v.tx <= 905 && v.ty >= 125 && v.ty <= 475)
 			if (v.tx >= 0 - win->zoom && v.tx <= 1220 + win->zoom && v.ty >= 0 - win->zoom && v.ty <= 700 + win->zoom)
 			{
@@ -110,59 +97,6 @@ void	draw_plane(t_wind *win)
 		}
 		y += step;
 	}
-	// while (map[y])
-	// {
-	// 	x = 0;
-	// 	while (map[y][x])
-	// 	{
-	// 		v.tx = v.ox + v.ix * (x - win->centre_x) + v.jx * (y - win->centre_y) + v.kx * map[y][x][0];
-	// 		v.ty = v.oy + v.iy * (x - win->centre_x) + v.jy * (y - win->centre_y) + v.ky * map[y][x][0];
-	// 		// if (v.tx >= 305 && v.tx <= 905 && v.ty >= 125 && v.ty <= 475)
-	// 		if (v.tx >= 0 - win->zoom && v.tx <= 1220 + win->zoom && v.ty >= 0 - win->zoom && v.ty <= 700 + win->zoom)
-	// 		{
-	// 			if (map[y][x + 1] && map[y][x][0] < map[y][x + 1][0])
-	// 				draw_line(win, v.tx, v.ty, v.tx + v.jx + v.kx * 1, v.ty + v.jy + v.ky * 1);
-	// 			else if (map[y][x + 1] && map[y][x][0] > map[y][x + 1][0])
-	// 				draw_line(win, v.tx, v.ty, v.tx + v.jx - v.kx * 1, v.ty + v.jy - v.ky * 1);
-	// 			else if (map[y + 1])
-	// 				draw_line(win, v.tx, v.ty, v.tx + v.jx, v.ty + v.jy);
-
-	// 			if (map[y + 1] && map[y][x][0] < map[y + 1][x][0])
-	// 				draw_line(win, v.tx, v.ty, v.tx + v.ix + v.kx * 1, v.ty + v.iy + v.ky * 1);
-	// 			else if (map[y +] && map[y][x][0] > map[y + 1][x][0])
-	// 				draw_line(win, v.tx, v.ty, v.tx + v.ix - v.kx * 1, v.ty + v.iy - v.ky * 1);
-	// 			if (map[y][x + 1])
-	// 				draw_line(win, v.tx, v.ty, v.tx + v.ix, v.ty + v.iy);
-	// 		}
-	// 		x += step;
-	// 	}
-	// 	y += step;
-	// }
-	// win->color = 0x555555;
-	// c = 600 / win->zoom + 3;
-	// y = -c / 1.75;
-	// while (y <= c / 1.75 + 1)
-	// {
-	// 	x = -c;
-	// 	while (x <= c)
-	// 	{
-	// 		t.x = o.x + i.x * x + j.x * y;
-	// 		t.y = o.y + i.y * x + j.y * y;
-	// 		// draw_line(win, o.x + i.x * x,   o.y + i.y * x + j.y * y,   o.x + i.x * x + j.x,         o.y + j.y + i.y * x + j.y * y);
-	// 		// draw_line(win, o.x + i.x * x,   o.y + i.y * x + j.y * y,   o.x + i.x * x + j.x + i.x,   o.y + t.y + i.y * x + j.y * y);
-	// 		// draw_line(win, o.x + t.x,   o.y + t.y,   o.x + t.x + i.x,   o.y + t.y      );
-	// 		if (y < c / 1.75)
-	// 			draw_line(win, t.x, t.y, t.x + j.x, t.y + j.y);
-	// 		if (x < c)
-	// 		{
-	// 			draw_line(win, t.x, t.y, t.x + i.x, t.y + i.y);
-	// 			// if (y < c / 1.75)
-	// 			// 	draw_line(win, t.x, t.y, t.x + j.x + i.x, t.y + i.y + j.y);
-	// 		}
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
 	win->color = 0x444444;
 	draw_line(win, v.ox, v.oy, v.ox + v.ix + v.jx, v.oy + v.iy + v.jy);
 	win->color = 0xDD5555;
@@ -170,6 +104,6 @@ void	draw_plane(t_wind *win)
 	win->color = 0x55DD55;
 	draw_line(win, v.ox, v.oy, v.ox + v.jx, v.oy + v.jy);
 	// win->color = 0x5555DD;
-	win->color = 0xFFFFFF;
-	draw_line(win, v.ox, v.oy, v.ox + v.kx, v.oy + v.ky);
+	// win->color = 0xFFFFFF;
+	// draw_line(win, v.ox, v.oy, v.ox + v.kx, v.oy + v.ky);
 }
