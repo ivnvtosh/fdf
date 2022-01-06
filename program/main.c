@@ -94,8 +94,8 @@ void	ft_fdf(t_wind *win, int fd)
 	win->offset_x = 610;
 	win->offset_y = 350;
 	win->angl_x = 0;
-	win->angl_y = -210;
-	win->angl_z = -90;
+	win->angl_y = -90;
+	win->angl_z = 0;
 	
 	int	x1;
 	int	y1;
