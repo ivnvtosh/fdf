@@ -14,16 +14,12 @@
 
 static void	rotate_x(t_wind *win, float rotate)
 {
-	// win->angl_z += rotate;
-	win->angl_x += rotate;
-	win->angl_y += rotate;
+	win->angl_z += rotate;
 }
 
 static void	rotate_y(t_wind *win, float rotate)
 {
-	// win->angl_z += rotate;
-	win->angl_x += rotate;
-	win->angl_y += rotate;
+	win->angl_z += rotate;
 }
 
 void	rotate_z(t_wind *win, int key)
