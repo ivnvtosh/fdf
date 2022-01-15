@@ -1,6 +1,8 @@
 .DS_Store
 .vscode
 .idea
+*.dSYM
+*.gch
 *.swp
 *.out
 *.o

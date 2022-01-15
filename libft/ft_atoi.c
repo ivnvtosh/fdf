@@ -12,19 +12,19 @@
 
 int	ft_isdigit(int c);
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *s)
 {
 	int	n;
 	int	sign;
 
 	n = 0;
 	sign = 1;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == 43 || *str == 45)
-		if (*str++ == 45)
+	while (*s == 32 || (*s >= 9 && *s <= 13))
+		s++;
+	if (*s == 43 || *s == 45)
+		if (*s++ == 45)
 			sign = -1;
-	while (ft_isdigit(*str))
-		n = n * 10 + *str++ - 48;
+	while (ft_isdigit(*s))
+		n = n * 10 + *s++ - 48;
 	return (n * sign);
 }

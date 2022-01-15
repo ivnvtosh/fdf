@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_part.c                                       :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 16:12:19 by ccamie            #+#    #+#             */
-/*   Updated: 2021/11/24 16:13:55 by ccamie           ###   ########.fr       */
+/*   Created: 2022/01/13 06:38:00 by ccamie            #+#    #+#             */
+/*   Updated: 2022/01/13 06:38:04 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include "../libft/libft.h"
+int		ft_isdigit(int c);
 
-int	print_part(const char **ps)
+long long	ft_atoll(const char *s)
 {
-	const char	*s;
-	int			i;
+	long long	n;
+	int			sign;
 
-	s = *ps;
-	i = 0;
-	while (s[i] != '%' && s[i] != '\0')
-		i++;
-	*ps += write(1, s, i);
-	return (i);
+	n = 0;
+	sign = 1;
+	while (*s == 32 || (*s >= 9 && *s <= 13))
+		s++;
+	if (*s == 43 || *s == 45)
+		if (*s++ == 45)
+			sign = -1;
+	while (ft_isdigit(*s))
+		n = n * 10 + *s++ - 48;
+	return (n * sign);
 }

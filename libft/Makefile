@@ -12,9 +12,9 @@
 
 NAME		=	libft.a
 HEADER		=	libft.h
-HEADER_B	=	libft_bonus.h
 
 SRCS		=	ft_atoi.c		\
+				ft_atoll.c		\
 				ft_bzero.c		\
 				ft_calloc.c		\
 				ft_isalnum.c	\
@@ -46,6 +46,7 @@ SRCS		=	ft_atoi.c		\
 				ft_strrchr.c	\
 				ft_strtrim.c	\
 				ft_substr.c		\
+				ft_swap.c		\
 				ft_tolower.c	\
 				ft_toupper.c
 
@@ -68,19 +69,18 @@ RM			=	rm -f
 OBJS		=	$(SRCS:.c=.o)
 OBJS_B		=	$(SRCS_B:.c=.o)
 
+.PHONY		:	all clean fclean re bonus rebonus
+
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJS)
-				$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+				$(AR) $(ARFLAGS) $(NAME) $?
 
-bonus		:	$(OBJS) $(OBJS_B)
-				$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(OBJS_B)
-
-$(OBJS)		:	%.o	: %.c $(HEADER)
+%.o			:	%.c $(HEADER)
 				$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJS_B)	:	%.o	: %.c $(HEADER_B)
-				$(CC) $(CFLAGS) -c $< -o $@
+bonus		:	
+				@make OBJS="$(OBJS) $(OBJS_B)" all
 
 clean		:
 				$(RM) $(OBJS) $(OBJS_B)
@@ -91,5 +91,3 @@ fclean		:	clean
 re			:	fclean all
 
 rebonus		:	fclean bonus
-
-.PHONY		:	all clean fclean re bonus rebonus

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+
 char	*ft_strdup(const char *s1);
 
 static size_t	ft_nbrlen(int n)
