@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c);
+int	ft_isdigit(int c);
 
 long long	ft_atoll(const char *s)
 {

@@ -15,6 +15,7 @@ HEADER		=	libft.h
 
 SRCS		=	ft_atoi.c		\
 				ft_atoll.c		\
+				ft_atox.c		\
 				ft_bzero.c		\
 				ft_calloc.c		\
 				ft_isalnum.c	\
