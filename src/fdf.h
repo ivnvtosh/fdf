@@ -1,15 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/16 18:22:29 by ccamie            #+#    #+#             */
+/*   Updated: 2022/01/16 18:22:31 by ccamie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
 # include <stdio.h>
 
-typedef struct s_ptr
+typedef struct s_frame
+{
+	void	*screen;
+	char	*buffer;
+	int		pixel;
+	int		line;
+	int		endian;
+}	t_frame;
+
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
+	t_frame	frame;
 	int		width;
 	int		height;
-}	t_ptr;
+}	t_mlx;
 
 typedef struct s_map
 {
@@ -39,7 +61,6 @@ typedef struct s_centre
 
 typedef struct s_render
 {
-	void		*frame;
 	float		zoom;
 	t_angle		angle;
 	t_shift		shift;
@@ -54,7 +75,7 @@ typedef struct s_mouse
 
 typedef struct s_data
 {
-	t_ptr		ptr;
+	t_mlx		mlx;
 	t_map		map;
 	t_render	render;
 	t_mouse		mouse;

@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preprocessing.c                                    :+:      :+:    :+:   */
+/*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/16 18:23:02 by ccamie            #+#    #+#             */
-/*   Updated: 2022/01/16 18:23:03 by ccamie           ###   ########.fr       */
+/*   Created: 2022/01/16 19:16:43 by ccamie            #+#    #+#             */
+/*   Updated: 2022/01/16 19:16:45 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 
-t_render	preprocessing(t_map map, t_mlx mlx)
-{
-	t_render	render;
+int		key_pressed(int key, t_data *data);
+void	leave(int code);
 
-	(void)map;
-	render.shift.x = mlx.width / 2;
-	render.shift.y = mlx.height / 2;
-	render.angle.x = 0;
-	render.angle.y = 0;
-	render.angle.z = 0;
-	render.zoom = 10;
-	return (render);
+int	bye(t_data *data)
+{
+	(void)data;
+	leave(0);
+	return (0);
+}
+
+void	event(t_data *data)
+{
+	mlx_hook(data->mlx.win, 2, 0, key_pressed, data);
+	mlx_hook(data->mlx.win, 17, 0, bye, data);
+	mlx_loop(data->mlx.mlx);
 }

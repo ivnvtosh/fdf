@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/16 18:22:55 by ccamie            #+#    #+#             */
+/*   Updated: 2022/01/16 18:22:56 by ccamie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "../get_next_line/get_next_line.h"
@@ -5,6 +16,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <limits.h>
 
 void	leave(int code);
 
@@ -53,8 +65,8 @@ void	process_map(t_list *list, t_line *line)
 	while (list)
 	{
 		line = (t_line *)malloc(sizeof(t_line));
-		height = (int *)malloc(sizeof(int *) * i);
-		color = (int *)ft_calloc(1, sizeof(int *) * i);
+		height = (int *)malloc(sizeof(int *) * (i + 1));
+		color = (int *)ft_calloc(1, sizeof(int *) * (i + 1));
 		if (line == NULL || height == NULL || color == NULL)
 			leave(2);
 		line->height = height;
@@ -72,6 +84,8 @@ void	process_map(t_list *list, t_line *line)
 			free(*ps++);
 			s = *ps;
 		}
+		*height = INT_MIN;
+		*color = INT_MIN;
 		free(list->content);
 		list->content = line;
 		list = list->next;
@@ -106,7 +120,6 @@ void	get_map(t_list *list, t_map *map)
 void	parser(t_map *map, char	*path)
 {
 	t_list	*list;
-	// t_line	*line;
 	int		fd;
 
 	fd = open(path, S_IREAD);

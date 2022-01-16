@@ -14,12 +14,16 @@ NAME		=		fdf
 HEADER		=	src/fdf.h
 
 LIBFT		=	libft/libft.a
-# LIBMLX		=	
+MINILIBX	=	minilibx/libmlx.a
 
 GNL			=	get_next_line/get_next_line_utils.c	\
 				get_next_line/get_next_line.c
-				
-SRCS		=	src/fdf.c			\
+
+SRCS		=	src/background.c	\
+				src/draw.c			\
+				src/event.c			\
+				src/fdf.c			\
+				src/key_pressed.c	\
 				src/main.c			\
 				src/parser.c		\
 				src/preprocessing.c	\
@@ -36,18 +40,15 @@ OBJS		=	$(SRCS:.c=.o) $(GNL:.c=.o)
 
 all			:	$(NAME)
 
-$(NAME)		:	$(LIBFT) $(OBJS)
-				$(CC) $(CFLAGS) $(LIBFT) $(OBJS) -o $(NAME) 
-
-# $(NAME)		:	$(LIBFT) $(LIBMLX) $(OBJS)
-# 				$(CC) $(CFLAGS) $(LIBFT) $(LIBMLX) $(OBJS) -framework OpenGL -framework AppKit -o $(NAME) 
+$(NAME)		:	$(LIBFT) $(MINILIBX) $(OBJS)
+				$(CC) $(CFLAGS) $(LIBFT) $(MINILIBX) -framework OpenGL -framework AppKit $(OBJS) -o $(NAME) 
 
 $(LIBFT)	:
 				make -C libft bonus
 				make -C libft clean
 
-# $(LIBMLX)	:
-# 				# make -C 
+$(MINILIBX)	:
+				make -C minilibx
 
 %.o			:	%.c $(HEADER)
 				$(CC) $(CFLAGS) -c $< -o $@

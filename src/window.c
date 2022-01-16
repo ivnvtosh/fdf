@@ -1,13 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/16 18:23:15 by ccamie            #+#    #+#             */
+/*   Updated: 2022/01/16 18:23:16 by ccamie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fdf.h"
+#include "mlx.h"
 
-t_ptr	window()
+t_frame	get_frame(t_mlx mlx)
 {
-	t_ptr	ptr;
+	t_frame	frame;
+	int		pixel;
+	int		line;
+	int		endian;
 
-	ptr.width = 1220;
-	ptr.height = 700;
-	ptr.mlx = mlx_init();
-	ptr.win = mlx_new_window(ptr.mlx, ptr.width, ptr.height, "FDF");
-	return (ptr);
+	frame.screen = mlx_new_image(mlx.mlx, mlx.width, mlx.height);
+	frame.buffer = mlx_get_data_addr(frame.screen, &pixel, &line, &endian);
+	frame.pixel = pixel;
+	frame.line = line;
+	frame.endian = endian;
+	return (frame);
+}
+
+t_mlx	window(void)
+{
+	t_mlx	mlx;
+
+	mlx.width = 1220;
+	mlx.height = 700;
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, mlx.width, mlx.height, "FDF");
+	mlx.frame = get_frame(mlx);
+	return (mlx);
 }
