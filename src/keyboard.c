@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_pressed.c                                      :+:      :+:    :+:   */
+/*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,14 @@
 
 #include "fdf.h"
 
-void		leave(int code);
+#define KEY_ESC	53
+
+int	terminate(t_data *data);
 
 int	key_pressed(int key, t_data *data)
 {
-	(void)data;
 	printf("key %d\n", key);
-	if (key == 53)
-		leave(0);
+	if (key == KEY_ESC)
+		terminate(data);
 	return (key);
 }

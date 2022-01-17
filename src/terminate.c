@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "fdf.h"
 #include <stdlib.h>
 
 void	leave(int code)
@@ -18,4 +19,11 @@ void	leave(int code)
 	if (code)
 		ft_putstr_fd("Error\n", 2);
 	exit(code);
+}
+
+int	terminate(t_data *data)
+{
+	(void)data;
+	leave(0);
+	return (0);
 }

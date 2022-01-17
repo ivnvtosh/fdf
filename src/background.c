@@ -9,7 +9,7 @@
 /*   Updated: 2022/01/16 19:15:12 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-// char *buffer, int line_bytes, int width, int height
+
 #include "fdf.h"
 
 void	background(t_mlx mlx)
@@ -26,10 +26,11 @@ void	background(t_mlx mlx)
 		x = 0;
 		while (x < mlx.width)
 		{
-			pixel = (y * frame.line) + ((x++) * 4);
+			pixel = (y * frame.line) + (x * 4);
 			frame.buffer[pixel] = 48;
 			frame.buffer[pixel + 1] = 38;
 			frame.buffer[pixel + 2] = 42;
+			x++;
 		}
 		y++;
 	}

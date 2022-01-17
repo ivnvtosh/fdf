@@ -11,7 +11,14 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx.h"
+#include "../minilibx/mlx.h"
+
+// #define WIDTH	1920
+// #define HEIGHT	1080
+#define WIDTH	1220
+#define HEIGHT	700
+// #define WIDTH	610
+// #define HEIGHT	450
 
 t_frame	get_frame(t_mlx mlx)
 {
@@ -32,8 +39,8 @@ t_mlx	window(void)
 {
 	t_mlx	mlx;
 
-	mlx.width = 1220;
-	mlx.height = 700;
+	mlx.width = WIDTH;
+	mlx.height = HEIGHT;
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, mlx.width, mlx.height, "FDF");
 	mlx.frame = get_frame(mlx);

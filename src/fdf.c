@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "mlx.h"
+#include "../minilibx/mlx.h"
 
 void		parser(t_map *map, char	*path);
 t_mlx		window(void);

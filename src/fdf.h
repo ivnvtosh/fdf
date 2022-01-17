@@ -39,32 +39,19 @@ typedef struct s_map
 	int		**color;
 }	t_map;
 
-typedef struct s_angle
+typedef struct s_xyz
 {
 	float	x;
 	float	y;
 	float	z;
-}	t_angle;
-
-typedef struct s_shift
-{
-	float	x;
-	float	y;
-	float	z;
-}	t_shift;
-
-typedef struct s_centre
-{
-	float	x;
-	float	y;
-}	t_centre;
+}	t_xyz;
 
 typedef struct s_render
 {
-	float		zoom;
-	t_angle		angle;
-	t_shift		shift;
-	t_centre	centre;
+	float	zoom;
+	t_xyz	angle;
+	t_xyz	shift;
+	t_xyz	center;
 }	t_render;
 
 typedef struct s_mouse

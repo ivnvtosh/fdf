@@ -23,8 +23,9 @@ SRCS		=	src/background.c	\
 				src/draw.c			\
 				src/event.c			\
 				src/fdf.c			\
-				src/key_pressed.c	\
+				src/keyboard.c		\
 				src/main.c			\
+				src/mouse.c			\
 				src/parser.c		\
 				src/preprocessing.c	\
 				src/terminate.c		\
