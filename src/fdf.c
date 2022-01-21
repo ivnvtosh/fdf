@@ -13,19 +13,15 @@
 #include "fdf.h"
 #include "../minilibx/mlx.h"
 
-void		parser(t_map *map, char	*path);
-t_mlx		window(void);
-t_render	preprocessing(t_map map, t_mlx mlx);
-void		draw(t_data data);
+t_data		parser(char	*path);
+void		display_screen(t_data data);
 void		event(t_data *data);
 
 void	fdf(char *path)
 {
 	t_data	data;
 
-	parser(&data.map, path);
-	data.mlx = window();
-	data.render = preprocessing(data.map, data.mlx);
-	draw(data);
+	data = parser(path);
+	display_screen(data);
 	event(&data);
 }

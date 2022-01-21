@@ -10,34 +10,47 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY		:	all clean fclean re bonus rebonus libft minilibx
+NAME		=	../fdf
+HEADER		=	   fdf.h
 
-all			:	libft minilibx
-				make -C src all
+LIBFT		=	../libft/libft.a
+MINILIBX	=	../minilibx/libmlx.a
 
-bonus		:	libft minilibx
-				make -C src_bonus all
+GNL			=	../get_next_line/get_next_line_utils.c	\
+				../get_next_line/get_next_line.c
+HEADER_GNL	=	../get_next_line/get_next_line.h
 
-libft		:
-				make -C libft bonus
+SRCS		=	2d.c			\
+				background.c	\
+				display_screen.c\
+				event.c			\
+				fdf.c			\
+				keyboard.c		\
+				main.c			\
+				mouse.c			\
+				parser.c		\
+				terminate.c
 
-minilibx	:
-				make -C minilibx
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror
+RM			=	rm -f
+
+OBJS		=	$(SRCS:.c=.o) $(GNL:.c=.o)
+
+.PHONY		:	all clean fclean re
+
+all			:	$(NAME)
+
+$(NAME)		:	$(OBJS)
+				$(CC) $(CFLAGS) $(LIBFT) $(MINILIBX) -framework OpenGL -framework AppKit $(OBJS) -o $(NAME) 
+
+%.o			:	%.c $(HEADER) $(HEADER_GNL) $(LIBFT) $(MINILIBX)
+				$(CC) $(CFLAGS) -c $< -o $@
 
 clean		:
 				$(RM) $(OBJS)
-				make -C src clean
-#				make -C src_bonus clean
-				make -C libft clean
-				make -C minilibx clean
 
 fclean		:	clean
 				$(RM) $(NAME)
-				make -C src fclean
-#				make -C src_bonus fclean
-				make -C libft fclean
-				make -C minilibx fclean
-				
-re			:	fclean all
 
-rebonus		:	fclean bonus
+re			:	fclean all

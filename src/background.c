@@ -12,19 +12,17 @@
 
 #include "fdf.h"
 
-void	background(t_mlx mlx)
+void	background(t_frame frame)
 {
-	t_frame	frame;
 	int		pixel;
 	int		y;
 	int		x;
 
-	frame = mlx.frame;
 	y = 0;
-	while (y < mlx.height)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < mlx.width)
+		while (x < WIDTH)
 		{
 			pixel = (y * frame.line) + (x * 4);
 			frame.buffer[pixel] = 48;

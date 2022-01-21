@@ -12,6 +12,7 @@
 
 #include "../libft/libft.h"
 #include "../get_next_line/get_next_line.h"
+#include "../minilibx/mlx.h"
 #include "fdf.h"
 #include <fcntl.h>
 #include <unistd.h>
@@ -92,8 +93,9 @@ void	process_map(t_list *list, t_line *line)
 	}
 }
 
-void	get_map(t_list *list, t_map *map)
+t_map	get_map(t_list *list)
 {
+	t_map	map;
 	t_line	*temp;
 	int		**height;
 	int		**color;
@@ -104,8 +106,8 @@ void	get_map(t_list *list, t_map *map)
 	color = (int **)malloc(sizeof(int *) * i);
 	if (height == NULL || color == NULL)
 		leave(2);
-	map->height = height;
-	map->color = color;
+	map.height = height;
+	map.color = color;
 	while (i > 0)
 	{
 		temp = list->content;
@@ -115,10 +117,12 @@ void	get_map(t_list *list, t_map *map)
 		list = list->next;
 		i--;
 	}
+	return (map);
 }
 
-void	parser(t_map *map, char	*path)
+t_map	parser_map(char	*path)
 {
+	t_map	map;
 	t_list	*list;
 	int		fd;
 
@@ -129,5 +133,76 @@ void	parser(t_map *map, char	*path)
 	read_file(&list, fd);
 	close(fd);
 	process_map(list, NULL);
-	get_map(list, map);
+	map = get_map(list);
+	return (map);
 }
+
+t_frame	get_frame(t_mlx mlx)
+{
+	t_frame	frame;
+	int		pixel;
+	int		line;
+	int		endian;
+
+	frame.screen = mlx_new_image(mlx.mlx, WIDTH, HEIGHT);
+	frame.buffer = mlx_get_data_addr(frame.screen, &pixel, &line, &endian);
+	frame.pixel = pixel;
+	frame.line = line;
+	frame.endian = endian;
+	return (frame);
+}
+
+t_mlx	window(void)
+{
+	t_mlx	mlx;
+
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, WIDTH, HEIGHT, "FDF");
+	mlx.mode = 2;
+	mlx.frame = get_frame(mlx);
+	return (mlx);
+}
+
+t_vector2	get_center(int **map)
+{
+	t_vector2	center;
+	int			y;
+	int			x;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x] != INT_MIN)
+			x++;
+		y++;
+	}
+	center.x = x / 2;
+	center.y = y / 2;
+	return (center);
+}
+
+t_render	preprocessing(t_map map)
+{
+	t_render	render;
+
+	render.shift.x = WIDTH / 2;
+	render.shift.y = HEIGHT / 2;
+	render.angle.x = 0;
+	render.angle.y = 0;
+	render.angle.z = 0;
+	render.center = get_center(map.height);
+	render.zoom = 16;
+	return (render);
+}
+
+t_data	parser(char	*path)
+{
+	t_data	data;
+
+	data.map = parser_map(path);
+	data.mlx = window();
+	data.render = preprocessing(data.map);
+	return (data);
+}
+
