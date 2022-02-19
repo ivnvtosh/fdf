@@ -7,7 +7,7 @@ static int	*get_color(char **ps, t_vector2 size)
 	int	i;
 	int	j;
 
-	color = (int *)malloc(sizeof(int *) + (size.x));
+	color = (int *)malloc(sizeof(int) * ((int)size.x));
 	if (color == NULL)
 		terminate(MALLOC);
 	i = 0;
@@ -16,8 +16,8 @@ static int	*get_color(char **ps, t_vector2 size)
 		j = 0;
 		while (ps[i][j] != '\0' && ps[i][j] != ',')
 			j++;
-		if (ps[i][j] != '\0')
-			color[i] = ft_atox(ps[i]);
+		if (ps[i][j] == ',')
+			color[i] = ft_atox(&ps[i][j + 1]);
 		else
 			color[i] = 0xFFFFFF;
 		i++;
@@ -30,7 +30,7 @@ int	**get_map_color(t_list *list, t_vector2 size)
 	int	**color;
 	int	i;
 
-	color = (int **)malloc(sizeof(int **) + (size.y));
+	color = (int **)malloc(sizeof(int *) * (size.y));
 	if (color == NULL)
 		terminate(MALLOC);
 	i = 0;

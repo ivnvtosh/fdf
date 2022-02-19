@@ -6,7 +6,7 @@ static int	*get_height(char **ps, t_vector2 size)
 	int	*height;
 	int	i;
 
-	height = (int *)malloc(sizeof(int *) + (size.x));
+	height = (int *)malloc(sizeof(int) * ((int)size.x));
 	if (height == NULL)
 		terminate(MALLOC);
 	i = 0;
@@ -23,7 +23,7 @@ int	**get_map_height(t_list *list, t_vector2 size)
 	int	**height;
 	int	i;
 
-	height = (int **)malloc(sizeof(int **) + (size.y));
+	height = (int **)malloc(sizeof(int *) * (size.y));
 	if (height == NULL)
 		terminate(MALLOC);
 	i = 0;

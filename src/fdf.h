@@ -69,8 +69,23 @@ typedef struct s_data
 	t_vector2	mouse;
 }	t_data;
 
-void	display_screen(t_data data, t_mlx mlx);
-void	background(t_frame frame);
-int		terminate(int code);
+void		display_screen(t_data data, t_mlx mlx);
+void		background(t_frame frame);
+int			terminate(int code);
+
+t_vector2	vector_divide(t_vector2 vector, int divider);
+t_vector2	vector_reduce(t_vector2 vector, t_vector2 reduce);
+t_vector2	vector_increase(t_vector2 vector, t_vector2 increase);
+
+int			pixel_on_the_screen(t_vector2 vector);
+int			line_on_the_screen(t_vector2 start, t_vector2 end);
+
+int			get_t(int trgb);
+int			get_r(int trgb);
+int			get_g(int trgb);
+int			get_b(int trgb);
+
+void	write_pixel(t_frame	frame, t_vector2 vector, int trgb);
+void	write_line(t_frame frame, t_vector2 start, t_vector2 end, int trgb);
 
 #endif
