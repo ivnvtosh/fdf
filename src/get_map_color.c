@@ -1,7 +1,7 @@
 #include "fdf.h"
 #include <stdlib.h>
 
-int	*get_color(char **ps, t_vector2 size)
+static int	*get_color(char **ps, t_vector2 size)
 {
 	int	*color;
 	int	i;
@@ -11,7 +11,7 @@ int	*get_color(char **ps, t_vector2 size)
 	if (color == NULL)
 		terminate(MALLOC);
 	i = 0;
-	while (*ps != NULL && **ps != '\n')
+	while (ps[i] != NULL && ps[i][0] != '\n')
 	{
 		j = 0;
 		while (ps[i][j] != '\0' && ps[i][j] != ',')
@@ -19,7 +19,7 @@ int	*get_color(char **ps, t_vector2 size)
 		if (ps[i][j] != '\0')
 			color[i] = ft_atox(ps[i]);
 		else
-			color[i] = 0;
+			color[i] = 0xFFFFFF;
 		i++;
 	}
 	return (color);

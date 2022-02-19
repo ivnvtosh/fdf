@@ -69,6 +69,8 @@ typedef struct s_data
 	t_vector2	mouse;
 }	t_data;
 
-void	terminate(int code);
+void	display_screen(t_data data, t_mlx mlx);
+void	background(t_frame frame);
+int		terminate(int code);
 
 #endif

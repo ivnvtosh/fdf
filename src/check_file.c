@@ -1,5 +1,6 @@
 #include "fdf.h"
 #include <fcntl.h>
+#include <unistd.h>
 
 int	open_file(char *path)
 {
@@ -11,7 +12,7 @@ int	open_file(char *path)
 	return (fd);
 }
 
-t_list	*read_file(char *path, int fd)
+t_list	*read_file(int fd)
 {
 	t_list	*list;
 	t_list	*temp;
@@ -20,6 +21,7 @@ t_list	*read_file(char *path, int fd)
 	s = get_next_line(fd);
 	if (s == NULL)
 		terminate(FD);
+	list = NULL;
 	while (s != NULL)
 	{
 		temp = ft_lstnew(s);

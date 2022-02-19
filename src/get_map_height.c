@@ -1,7 +1,7 @@
 #include "fdf.h"
 #include <stdlib.h>
 
-int	*get_height(char **ps, t_vector2 size)
+static int	*get_height(char **ps, t_vector2 size)
 {
 	int	*height;
 	int	i;
@@ -10,7 +10,7 @@ int	*get_height(char **ps, t_vector2 size)
 	if (height == NULL)
 		terminate(MALLOC);
 	i = 0;
-	while (*ps != NULL && **ps != '\n')
+	while (ps[i] != NULL && ps[i][0] != '\n')
 	{
 		height[i] = ft_atoi(ps[i]);
 		i++;

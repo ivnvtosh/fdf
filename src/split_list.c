@@ -1,4 +1,5 @@
 #include "fdf.h"
+#include <stdlib.h>
 
 void	split_list(t_list *list)
 {
