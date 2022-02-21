@@ -27,10 +27,10 @@ void	write_line(t_frame frame, t_vector2 start, t_vector2 end, int trgb)
 	step = vector_reduce(end, start);
 	max = ft_max(step.x, step.y);
 	step = vector_divide(step, max);
+	write_pixel(frame, start, trgb);
 	while ((int)(start.x - end.x) || (int)(start.y - end.y))
 	{
 		write_pixel(frame, start, trgb);
 		start = vector_increase(start, step);
 	}
-	write_pixel(frame, start, trgb);	// yeah boy
 }

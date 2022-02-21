@@ -14,7 +14,7 @@ static t_vector3	get_angle(void)
 	t_vector3	angle;
 
 	angle.x = 0;
-	angle.y = 0;
+	angle.y = 135;
 	angle.z = 0;
 	return (angle);
 }
@@ -35,6 +35,7 @@ t_render	parse_var(t_vector2 size)
 	render.offset = get_offset();
 	render.angle = get_angle();
 	render.center = get_center(size);
-	render.zoom = 16;
+	render.height = 0.1;
+	render.zoom = ((WIDTH) / size.x + (HEIGHT) / size.y) / 4;
 	return (render);
 }

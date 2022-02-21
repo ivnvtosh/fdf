@@ -20,7 +20,7 @@ static int	mouse_offset(int x, int y, t_data *data)
 
 static int	mouse_rotate(int x, int y, t_data *data)
 {
-	data->render.angle.x += (x - data->mouse.x) * 0.1;
+	data->render.angle.x -= (x - data->mouse.x) * 0.1;
 	data->render.angle.y += (y - data->mouse.y) * 0.1;
 	data->mouse.x = x;
 	data->mouse.y = y;

@@ -28,12 +28,16 @@ static t_vector2	newvector2(t_render render, t_map map, int x, int y)
 {
 	t_vector2	new;
 	t_vector2	center;
+	t_vector2	offset;
 	float		zoom;
 
+	offset = vector_2_new(WIDTH / 2, HEIGHT / 2);
 	center = render.center;
 	zoom = ((WIDTH) / map.size.x + (HEIGHT) / map.size.y) / 4;
 	new.x = (x - center.x - map.height[y][x] / 8) * zoom;
 	new.y = (y - center.y - map.height[y][x] / 8) * zoom;
+	new = iso(new);
+	new = vector_increase(new, offset);
 	return (new);
 }
 
@@ -54,12 +58,12 @@ void	three_dimensional_space(t_frame frame, t_render render, t_map map)
 			if (x + 1 < map.size.x)
 			{
 				end = newvector2(render, map, x + 1, y);
-				isometry(frame, start, end, map.color[y][x]);
+				write_line(frame, start, end, map.color[y][x]);
 			}
 			if (y + 1 < map.size.y)
 			{
 				end = newvector2(render, map, x, y + 1);
-				isometry(frame, start, end, map.color[y][x]);
+				write_line(frame, start, end, map.color[y][x]);
 			}
 			x += 1;
 		}

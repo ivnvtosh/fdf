@@ -10,6 +10,8 @@
 #define KEY_THREE	20
 #define KEY_PLUS	24
 #define KEY_MINUS	27
+#define KEY_SCRG	30
+#define KEY_SCLE	33
 #define KEY_ESC		53
 #define KEY_LEFT	123
 #define KEY_RIGHT	124
@@ -26,6 +28,10 @@ static void	offset(int key, t_data *data)
 		data->render.offset.y += 10;
 	else if (key == KEY_RIGHT)
 		data->render.offset.x += 10;
+	else if (key == KEY_SCLE)
+		data->render.height -= 0.1;
+	else if (key == KEY_SCRG)
+		data->render.height += 0.1;
 	else
 		return ;
 	display_screen(*data, data->mlx);
@@ -62,12 +68,18 @@ static void	zoom(int key, t_data *data)
 
 static void	mode(int key, t_data *data)
 {
-	if (key == KEY_TWO)
+	t_vector2	size;
+
+	if (key == KEY_TWO && data->mode != 2)
 		data->mode = 2;
-	else if (key == KEY_THREE)
+	else if (key == KEY_THREE && data->mode != 3)
 		data->mode = 3;
 	else
 		return ;
+	size = data->map.size;
+	data->render.height = 0.1;
+	data->render.zoom = ((WIDTH) / size.x + (HEIGHT) / size.y) / 4;
+	data->render.offset = vector_2_new(WIDTH / 2, HEIGHT / 2);
 	display_screen(*data, data->mlx);
 }
 

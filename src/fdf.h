@@ -68,8 +68,8 @@ void		display_screen(t_data data, t_mlx mlx);
 void		background(t_frame frame);
 int			terminate(int code);
 
-t_vector2	vector_2_new(int x, int y);
-t_vector2	vector_divide(t_vector2 vector, int divider);
+t_vector2	vector_2_new(float x, float y);
+t_vector2	vector_divide(t_vector2 vector, float divider);
 t_vector2	vector_reduce(t_vector2 vector, t_vector2 reduce);
 t_vector2	vector_increase(t_vector2 vector, t_vector2 increase);
 

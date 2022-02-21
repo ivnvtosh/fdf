@@ -6,7 +6,9 @@ LIBFT		=	../libft/libft.a
 LIBGNL		=	../libgnl/libgnl.a
 LIBMLX		=	../libmlx/libmlx.a
 
-SRCS		=	background.c			\
+SRCS		=	2d.c					\
+				3d.c					\
+				background.c			\
 				check_file.c			\
 				check_map.c				\
 				check_on_the_screen.c	\

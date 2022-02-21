@@ -32,4 +32,5 @@ void	write_line(t_frame frame, t_vector2 start, t_vector2 end, int trgb)
 		write_pixel(frame, start, trgb);
 		start = vector_increase(start, step);
 	}
+	write_pixel(frame, start, trgb);
 }
