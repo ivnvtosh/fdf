@@ -19,6 +19,7 @@ SRCS		=	background.c			\
 				get_map_size.c			\
 				keyboard.c				\
 				main.c					\
+				mouse.c					\
 				parse_frame.c			\
 				parse_map.c				\
 				parse_mlx.c				\

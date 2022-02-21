@@ -1,14 +1,5 @@
 #include "fdf.h"
 
-t_vector2	vector_2_new(int x, int y)
-{
-	t_vector2	vector;
-
-	vector.x = x;
-	vector.y = y;
-	return (vector);
-}
-
 t_vector2	vector_divide(t_vector2 vector, int divider)
 {
 	vector.x /= divider;
