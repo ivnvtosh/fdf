@@ -68,7 +68,7 @@ static void	zoom(int key, t_data *data)
 
 static void	mode(int key, t_data *data)
 {
-	t_vector2	size;
+	t_vector3	size;
 
 	if (key == KEY_TWO && data->mode != 2)
 		data->mode = 2;
@@ -77,9 +77,13 @@ static void	mode(int key, t_data *data)
 	else
 		return ;
 	size = data->map.size;
-	data->render.height = 0.1;
+	data->render.height = 0.3;
+	data->render.angle.x = 0;
+	data->render.angle.y = 135;
+	data->render.angle.z = 0;
 	data->render.zoom = ((WIDTH) / size.x + (HEIGHT) / size.y) / 4;
-	data->render.offset = vector_2_new(WIDTH / 2, HEIGHT / 2);
+	data->render.offset.x = WIDTH / 2;
+	data->render.offset.y = HEIGHT / 2;
 	display_screen(*data, data->mlx);
 }
 

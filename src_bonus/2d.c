@@ -2,10 +2,10 @@
 
 void	two_dimensional_space(t_frame frame, t_render render, t_map map)
 {
-	t_vector2	start;
-	t_vector2	end;
-	int			x;
-	int			y;
+	t_point	start;
+	t_point	end;
+	int		x;
+	int		y;
 
 	y = 0;
 	while (y < map.size.y)
@@ -15,17 +15,20 @@ void	two_dimensional_space(t_frame frame, t_render render, t_map map)
 		{
 			start.x = render.offset.x + (x - render.center.x) * render.zoom;
 			start.y = render.offset.y + (y - render.center.y) * render.zoom;
+			start.trgb = map.color[y][x];
 			if (x + 1 < map.size.x)
 			{
 				end.x = render.offset.x + (x - render.center.x + 1) * render.zoom;
 				end.y = render.offset.y + (y - render.center.y) * render.zoom;
-				write_line(frame, start, end, map.color[y][x]);
+				end.trgb = map.color[y][x + 1];
+				write_line(frame, start, end);
 			}
 			if (y + 1 < map.size.y)
 			{
 				end.x = render.offset.x + (x - render.center.x) * render.zoom;
 				end.y = render.offset.y + (y - render.center.y + 1) * render.zoom;
-				write_line(frame, start, end, map.color[y][x]);
+				end.trgb = map.color[y + 1][x];
+				write_line(frame, start, end);
 			}
 			x += 1;
 		}

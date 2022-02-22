@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-int	pixel_on_the_screen(t_vector2 vector)
+int	pixel_on_the_screen(t_point vector)
 {
 	if (!(vector.x > 0 && vector.x < WIDTH))
 		return (1);
@@ -9,7 +9,7 @@ int	pixel_on_the_screen(t_vector2 vector)
 	return (0);
 }
 
-int	line_on_the_screen(t_vector2 start, t_vector2 end)
+int	line_on_the_screen(t_point start, t_point end)
 {
 	if (!pixel_on_the_screen(start))
 		return (0);

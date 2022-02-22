@@ -19,7 +19,7 @@ static t_vector3	get_angle(void)
 	return (angle);
 }
 
-static t_vector2	get_center(t_vector2 size)
+static t_vector2	get_center(t_vector3 size)
 {
 	t_vector2	center;
 
@@ -28,14 +28,14 @@ static t_vector2	get_center(t_vector2 size)
 	return (center);
 }
 
-t_render	parse_var(t_vector2 size)
+t_render	parse_var(t_vector3 size)
 {
 	t_render	render;
 
 	render.offset = get_offset();
 	render.angle = get_angle();
 	render.center = get_center(size);
-	render.height = 0.1;
+	render.height = 0.3;
 	render.zoom = ((WIDTH) / size.x + (HEIGHT) / size.y) / 4;
 	return (render);
 }

@@ -1,7 +1,7 @@
 #include "fdf.h"
 
 t_map		parse_map(char *path);
-t_render	parse_var(t_vector2 size);
+t_render	parse_var(t_vector3 size);
 t_mlx		parse_mlx(void);
 t_frame		parse_frame(t_mlx mlx);
 

@@ -1,8 +1,8 @@
 #include "fdf.h"
 
-t_vector2	get_map_size(t_list *list)
+t_vector3	get_map_size(t_list *list)
 {
-	t_vector2	size;
+	t_vector3	size;
 	char		**ps;
 	int			x;
 	int			y;

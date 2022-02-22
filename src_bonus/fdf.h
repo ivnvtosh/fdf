@@ -16,6 +16,14 @@
 # define WIDTH	1220
 # define HEIGHT	700
 
+typedef struct s_point
+{
+	float	x;
+	float	y;
+	int		height;
+	int		trgb;
+}	t_point;
+
 typedef struct s_vector2
 {
 	float	x;
@@ -46,7 +54,7 @@ typedef struct s_mlx
 
 typedef struct s_map
 {
-	t_vector2	size;
+	t_vector3	size;
 	int			**height;
 	int			**color;
 }	t_map;
@@ -74,20 +82,20 @@ void		display_screen(t_data data, t_mlx mlx);
 void		background(t_frame frame);
 int			terminate(int code);
 
-t_vector2	vector_2_new(float x, float y);
-t_vector2	vector_divide(t_vector2 vector, float divider);
-t_vector2	vector_reduce(t_vector2 vector, t_vector2 reduce);
-t_vector2	vector_increase(t_vector2 vector, t_vector2 increase);
+t_point		vector_2_new(float x, float y);
+t_point		vector_divide(t_point vector, float divider);
+t_point		vector_reduce(t_point vector, t_point reduce);
+t_point		vector_increase(t_point vector, t_point increase);
 
-int			pixel_on_the_screen(t_vector2 vector);
-int			line_on_the_screen(t_vector2 start, t_vector2 end);
+int			pixel_on_the_screen(t_point vector);
+int			line_on_the_screen(t_point start, t_point end);
 
 int			get_t(int trgb);
 int			get_r(int trgb);
 int			get_g(int trgb);
 int			get_b(int trgb);
 
-void	write_pixel(t_frame	frame, t_vector2 vector, int trgb);
-void	write_line(t_frame frame, t_vector2 start, t_vector2 end, int trgb);
+void	write_pixel(t_frame	frame, t_point vector);
+void	write_line(t_frame frame, t_point start, t_point end);
 
 #endif

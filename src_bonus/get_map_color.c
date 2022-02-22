@@ -1,7 +1,7 @@
 #include "fdf.h"
 #include <stdlib.h>
 
-static int	*get_color(char **ps, t_vector2 size)
+static int	*get_color(char **ps, t_vector3 size)
 {
 	int	*color;
 	int	i;
@@ -25,7 +25,7 @@ static int	*get_color(char **ps, t_vector2 size)
 	return (color);
 }
 
-int	**get_map_color(t_list *list, t_vector2 size)
+int	**get_map_color(t_list *list, t_vector3 size)
 {
 	int	**color;
 	int	i;

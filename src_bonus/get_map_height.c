@@ -1,7 +1,7 @@
 #include "fdf.h"
 #include <stdlib.h>
 
-static int	*get_height(char **ps, t_vector2 size)
+static int	*get_height(char **ps, t_vector3 size)
 {
 	int	*height;
 	int	i;
@@ -18,7 +18,7 @@ static int	*get_height(char **ps, t_vector2 size)
 	return (height);
 }
 
-int	**get_map_height(t_list *list, t_vector2 size)
+int	**get_map_height(t_list *list, t_vector3 size)
 {
 	int	**height;
 	int	i;
