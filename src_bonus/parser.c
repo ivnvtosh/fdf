@@ -12,6 +12,7 @@ t_data	parser(char *path)
 	data.map = parse_map(path);
 	data.render = parse_var(data.map.size);
 	data.mode = 3;
+	data.mode_color = 0;
 	data.mlx = parse_mlx();
 	data.frame = parse_frame(data.mlx);
 	return (data);

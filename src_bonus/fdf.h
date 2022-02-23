@@ -16,10 +16,18 @@
 # define WIDTH	1220
 # define HEIGHT	700
 
+typedef struct s_rgb
+{
+	float	r;
+	float	g;
+	float	b;
+}	t_rgb;
+
 typedef struct s_point
 {
 	float	x;
 	float	y;
+	t_rgb	rgb;
 	int		height;
 	int		trgb;
 }	t_point;
@@ -57,6 +65,7 @@ typedef struct s_map
 	t_vector3	size;
 	int			**height;
 	int			**color;
+	int			**color_my;
 }	t_map;
 
 typedef struct s_render
@@ -73,6 +82,7 @@ typedef struct s_data
 	t_mlx		mlx;
 	t_map		map;
 	int			mode;
+	int			mode_color;
 	t_render	render;
 	t_frame		frame;
 	t_vector2	mouse;

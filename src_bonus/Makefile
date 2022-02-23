@@ -16,6 +16,7 @@ SRCS		=	2d.c					\
 				display_screen.c		\
 				event.c					\
 				fdf.c					\
+				get_map_color_my.c		\
 				get_map_color.c			\
 				get_map_height.c		\
 				get_map_size.c			\

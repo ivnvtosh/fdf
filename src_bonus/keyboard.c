@@ -12,6 +12,7 @@
 #define KEY_MINUS	27
 #define KEY_SCRG	30
 #define KEY_SCLE	33
+#define KEY_TAB		48
 #define KEY_ESC		53
 #define KEY_LEFT	123
 #define KEY_RIGHT	124
@@ -87,12 +88,26 @@ static void	mode(int key, t_data *data)
 	display_screen(*data, data->mlx);
 }
 
+static void	mode_color(int key, t_data *data)
+{
+	if (key == KEY_TAB)
+	{
+		data->mode_color += 1;
+		if (data->mode_color == 2)
+			data->mode_color = 0;
+	}
+	else
+		return ;
+	display_screen(*data, data->mlx);
+}
+
 int	key_pressed(int key, t_data *data)
 {
 	offset(key, data);
 	rotate(key, data);
 	zoom(key, data);
 	mode(key, data);
+	mode_color(key, data);
 	if (key == KEY_ESC)
 		terminate(GOOD);
 	return (key);

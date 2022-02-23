@@ -34,8 +34,8 @@ static t_vector2	newvector2(t_render render, t_map map, int x, int y)
 	offset = vector_2_new(WIDTH / 2, HEIGHT / 2);
 	center = render.center;
 	zoom = ((WIDTH) / map.size.x + (HEIGHT) / map.size.y) / 4;
-	new.x = (x - center.x - map.height[y][x] / 8) * zoom;
-	new.y = (y - center.y - map.height[y][x] / 8) * zoom;
+	new.x = (x - center.x - map.height[y][x] / 2.2) * zoom;
+	new.y = (y - center.y - map.height[y][x] / 2.2) * zoom;
 	new = iso(new);
 	new = vector_increase(new, offset);
 	return (new);
