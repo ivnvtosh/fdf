@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdlib.h>
 
 t_frame	parse_frame(t_mlx mlx)
 {
@@ -20,6 +21,8 @@ t_frame	parse_frame(t_mlx mlx)
 	int		endian;
 
 	frame.buffer = mlx_get_data_addr(mlx.screen, &pixel, &line, &endian);
+	if (frame.buffer == NULL)
+		exit(MALLOC);
 	frame.pixel = pixel;
 	frame.line = line;
 	frame.endian = endian;

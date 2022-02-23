@@ -21,7 +21,7 @@ void	split_list(t_list *list)
 	{
 		ps = ft_split(list->content, 32);
 		if (ps == NULL)
-			terminate(MALLOC);
+			exit(MALLOC);
 		free(list->content);
 		list->content = ps;
 		list = list->next;
