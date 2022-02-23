@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   terminate_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 19:04:51 by ccamie            #+#    #+#             */
-/*   Updated: 2022/02/23 19:04:52 by ccamie           ###   ########.fr       */
+/*   Created: 2022/02/23 19:40:46 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 19:40:48 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
+#include <stdlib.h>
 
-void	fdf(char *path);
-
-int	main(int argc, char **argv)
+int	terminate(int code)
 {
-	if (argc != 2)
-		return (NOTHING);
-	fdf(argv[1]);
-	return (GOOD);
+	if (code == ERROR)
+		ft_putstr_fd("Error\n", 2);
+	exit(code);
+	return (NOTHING);
 }

@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mode_color_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 19:04:51 by ccamie            #+#    #+#             */
-/*   Updated: 2022/02/23 19:04:52 by ccamie           ###   ########.fr       */
+/*   Created: 2022/02/23 20:13:58 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 20:14:00 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
-void	fdf(char *path);
+#define KEY_TAB	48
 
-int	main(int argc, char **argv)
+void	mode_color(int key, t_data *data)
 {
-	if (argc != 2)
-		return (NOTHING);
-	fdf(argv[1]);
-	return (GOOD);
+	if (key == KEY_TAB)
+	{
+		data->mode_color += 1;
+		if (data->mode_color == 2)
+			data->mode_color = 0;
+	}
+	else
+		return ;
+	display_screen(*data, data->mlx);
 }

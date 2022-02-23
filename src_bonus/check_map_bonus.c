@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 19:04:51 by ccamie            #+#    #+#             */
-/*   Updated: 2022/02/23 19:04:52 by ccamie           ###   ########.fr       */
+/*   Created: 2022/02/23 19:37:30 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 19:37:33 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
-void	fdf(char *path);
-
-int	main(int argc, char **argv)
+void	check_map(t_list *list)
 {
-	if (argc != 2)
-		return (NOTHING);
-	fdf(argv[1]);
-	return (GOOD);
+	char	**ps;
+	int		x;
+	int		i;
+
+	x = 0;
+	while (list != NULL)
+	{
+		i = 0;
+		ps = list->content;
+		while (ps[i] != NULL && ps[i][0] != '\n')
+			i += 1;
+		if (x == 0)
+			x = i;
+		if (x != i)
+			terminate(ERROR);
+		list = list->next;
+	}
 }

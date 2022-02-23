@@ -1,4 +1,16 @@
-#include "fdf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   3d_bonus.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 19:36:29 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 19:36:32 by ccamie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fdf_bonus.h"
 #include <math.h>
 
 #define RADIAN 0.01745329252
@@ -23,27 +35,29 @@ static t_basis	vector_get_basis(t_render render)
 	return (basis);
 }
 
-static t_point new_vector_2_here(t_data data, t_basis basis, int x, int y)
+static t_point	new_vector_2_here(t_data data, t_basis b, int x, int y)
 {
 	t_point		vector;
 	t_map		map;
-	t_render	render;
+	t_render	r;
 
 	map = data.map;
-	render = data.render;
-	vector.x = render.offset.x + basis.i.x * (x - render.center.x) + basis.j.x * (y - render.center.y) + basis.k.x * (float)map.height[y][x] * render.height;
-	vector.y = render.offset.y + basis.i.y * (x - render.center.x) + basis.j.y * (y - render.center.y) + basis.k.y * (float)map.height[y][x] * render.height;
+	r = data.render;
+	vector.x = r.offset.x + b.i.x * (x - r.center.x) + b.j.x \
+	* (y - r.center.y) + b.k.x * (float)map.height[y][x] * r.height;
+	vector.y = r.offset.y + b.i.y * (x - r.center.x) + b.j.y \
+	* (y - r.center.y) + b.k.y * (float)map.height[y][x] * r.height;
 	if (data.mode_color == 0)
 	{
-		vector.rgb.r =  get_r(map.color[y][x]);
-		vector.rgb.g =  get_g(map.color[y][x]);
-		vector.rgb.b =  get_b(map.color[y][x]);
+		vector.rgb.r = get_r(map.color[y][x]);
+		vector.rgb.g = get_g(map.color[y][x]);
+		vector.rgb.b = get_b(map.color[y][x]);
 	}
 	if (data.mode_color == 1)
 	{
-		vector.rgb.r =  get_r(map.color_my[y][x]);
-		vector.rgb.g =  get_g(map.color_my[y][x]);
-		vector.rgb.b =  get_b(map.color_my[y][x]);
+		vector.rgb.r = get_r(map.color_my[y][x]);
+		vector.rgb.g = get_g(map.color_my[y][x]);
+		vector.rgb.b = get_b(map.color_my[y][x]);
 	}
 	return (vector);
 }

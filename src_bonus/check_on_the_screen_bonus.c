@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_on_the_screen.c                              :+:      :+:    :+:   */
+/*   check_on_the_screen_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 17:35:53 by ccamie            #+#    #+#             */
-/*   Updated: 2022/02/23 17:35:56 by ccamie           ###   ########.fr       */
+/*   Created: 2022/02/23 19:37:40 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 19:37:41 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
-int	pixel_on_the_screen(t_vector2 vector)
+int	pixel_on_the_screen(t_point vector)
 {
 	if (!(vector.x > 0 && vector.x < WIDTH))
 		return (1);
@@ -21,7 +21,7 @@ int	pixel_on_the_screen(t_vector2 vector)
 	return (0);
 }
 
-int	line_on_the_screen(t_vector2 start, t_vector2 end)
+int	line_on_the_screen(t_point start, t_point end)
 {
 	if (!pixel_on_the_screen(start))
 		return (0);

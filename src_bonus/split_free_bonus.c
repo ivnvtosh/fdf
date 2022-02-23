@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   split_free_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 19:04:51 by ccamie            #+#    #+#             */
-/*   Updated: 2022/02/23 19:04:52 by ccamie           ###   ########.fr       */
+/*   Created: 2022/02/23 19:40:36 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 19:40:37 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
+#include <stdlib.h>
 
-void	fdf(char *path);
-
-int	main(int argc, char **argv)
+void	free_split(void *p)
 {
-	if (argc != 2)
-		return (NOTHING);
-	fdf(argv[1]);
-	return (GOOD);
+	char	**ps;
+	int		i;
+
+	if (p == NULL)
+		return ;
+	i = 0;
+	ps = p;
+	while (ps[i] != NULL)
+		free(ps[i++]);
+	free(ps);
 }

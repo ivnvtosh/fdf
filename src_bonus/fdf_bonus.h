@@ -1,11 +1,21 @@
-#ifndef FDF_H
-# define FDF_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 19:38:24 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 19:38:25 by ccamie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include "../libft/libft.h"
 # include "../libgnl/get_next_line.h"
 # include "../libmlx/mlx.h"
-
-# include <stdio.h>
 
 # define GOOD		0
 # define ERROR		1
@@ -105,7 +115,7 @@ int			get_r(int trgb);
 int			get_g(int trgb);
 int			get_b(int trgb);
 
-void	write_pixel(t_frame	frame, t_point vector);
-void	write_line(t_frame frame, t_point start, t_point end);
+void		write_pixel(t_frame	frame, t_point vector);
+void		write_line(t_frame frame, t_point start, t_point end);
 
 #endif

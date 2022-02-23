@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_height.c                                   :+:      :+:    :+:   */
+/*   get_map_height_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 19:04:30 by ccamie            #+#    #+#             */
-/*   Updated: 2022/02/23 19:04:30 by ccamie           ###   ########.fr       */
+/*   Created: 2022/02/23 19:38:50 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 19:38:51 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include <stdlib.h>
 
-static int	*get_height(char **ps, t_vector2 size)
+static int	*get_height(char **ps, t_vector3 size)
 {
 	int	*height;
 	int	i;
@@ -30,7 +30,7 @@ static int	*get_height(char **ps, t_vector2 size)
 	return (height);
 }
 
-int	**get_map_height(t_list *list, t_vector2 size)
+int	**get_map_height(t_list *list, t_vector3 size)
 {
 	int	**height;
 	int	i;

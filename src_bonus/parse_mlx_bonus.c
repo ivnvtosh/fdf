@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_mlx_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 19:04:51 by ccamie            #+#    #+#             */
-/*   Updated: 2022/02/23 19:04:52 by ccamie           ###   ########.fr       */
+/*   Created: 2022/02/23 19:39:48 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 19:39:49 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
-void	fdf(char *path);
-
-int	main(int argc, char **argv)
+t_mlx	parse_mlx(void)
 {
-	if (argc != 2)
-		return (NOTHING);
-	fdf(argv[1]);
-	return (GOOD);
+	t_mlx	mlx;
+
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, WIDTH, HEIGHT, "FDF");
+	mlx.screen = mlx_new_image(mlx.mlx, WIDTH, HEIGHT);
+	return (mlx);
 }

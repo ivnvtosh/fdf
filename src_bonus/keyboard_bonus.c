@@ -1,4 +1,16 @@
-#include "fdf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keyboard_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 19:39:05 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 19:39:06 by ccamie           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fdf_bonus.h"
 
 #define KEY_A		0
 #define KEY_S		1
@@ -88,18 +100,7 @@ static void	mode(int key, t_data *data)
 	display_screen(*data, data->mlx);
 }
 
-static void	mode_color(int key, t_data *data)
-{
-	if (key == KEY_TAB)
-	{
-		data->mode_color += 1;
-		if (data->mode_color == 2)
-			data->mode_color = 0;
-	}
-	else
-		return ;
-	display_screen(*data, data->mlx);
-}
+void	mode_color(int key, t_data *data);
 
 int	key_pressed(int key, t_data *data)
 {

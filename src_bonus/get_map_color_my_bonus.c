@@ -1,55 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_color.c                                    :+:      :+:    :+:   */
+/*   get_map_color_my_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 19:04:22 by ccamie            #+#    #+#             */
-/*   Updated: 2022/02/23 19:04:22 by ccamie           ###   ########.fr       */
+/*   Created: 2022/02/23 19:38:42 by ccamie            #+#    #+#             */
+/*   Updated: 2022/02/23 19:38:43 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include <stdlib.h>
 
-static int	*get_color(char **ps, t_vector2 size)
+static int	*get_color(int *height, t_vector3 size)
 {
 	int	*color;
-	int	i;
-	int	j;
+	int	x;
 
 	color = (int *)malloc(sizeof(int) * ((int)size.x));
 	if (color == NULL)
 		terminate(MALLOC);
-	i = 0;
-	while (ps[i] != NULL && ps[i][0] != '\n')
+	x = 0;
+	while (x < size.x)
 	{
-		j = 0;
-		while (ps[i][j] != '\0' && ps[i][j] != ',')
-			j++;
-		if (ps[i][j] == ',')
-			color[i] = ft_atox(&ps[i][j + 1]);
-		else
-			color[i] = 0xFFFFFF;
-		i++;
+		if (height[x] == 0)
+			color[x] = 0x601060;
+		if (height[x])
+			color[x] = 0xffa510;
+		x++;
 	}
 	return (color);
 }
 
-int	**get_map_color(t_list *list, t_vector2 size)
+int	**get_map_color_my(int **height, t_vector3 size)
 {
 	int	**color;
-	int	i;
+	int	y;
 
 	color = (int **)malloc(sizeof(int *) * (size.y));
 	if (color == NULL)
 		terminate(MALLOC);
-	i = 0;
-	while (list != NULL)
+	y = 0;
+	while (y < size.y)
 	{
-		color[i++] = get_color(list->content, size);
-		list = list->next;
+		color[y] = get_color(height[y], size);
+		y++;
 	}
 	return (color);
 }
