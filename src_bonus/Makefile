@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME		=	../fdf
-HEADER		=	   fdf.h
+HEADER		=	   fdf_bonus.h
 
 LIBFT		=	../libft/libft.a
 LIBGNL		=	../libgnl/libgnl.a
